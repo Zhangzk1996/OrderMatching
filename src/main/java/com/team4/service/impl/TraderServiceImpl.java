@@ -24,8 +24,8 @@ public class TraderServiceImpl implements TraderService {
 		traderMapper.deleteTrader(traderId);
 	}
 
-	public Trader getTraderInfo(int traderId) {
-		Trader trader = traderMapper.getTraderInfo(traderId);
+	public Trader getTraderInfo(String traderName) {
+		Trader trader = traderMapper.getTraderInfo(traderName);
 		return trader;
 	}
 

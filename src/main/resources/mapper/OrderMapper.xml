@@ -44,6 +44,6 @@
   </select>
   
   <delete id="deleteOrder" parameterType="java.lang.Integer">
-  	delete from order where orderID = #{orderId,jdbcType=INTEGER}
+  	update order set status = #{status,jdbcType=VARCHAR} where orderID = #{orderId,jdbcType=INTEGER}
   </delete>
 </mapper>

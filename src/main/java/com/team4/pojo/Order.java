@@ -3,7 +3,7 @@ package com.team4.pojo;
 public class Order {
 	private int orderId;
 	private String symbol;
-	private int traderId;
+	private String traderName;
 	private String side;
 	private int Qty;
 	private float price;
@@ -22,11 +22,11 @@ public class Order {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public int getTraderId() {
-		return traderId;
+	public String getTraderName() {
+		return traderName;
 	}
-	public void setTraderId(int traderId) {
-		this.traderId = traderId;
+	public void setTraderId(String traderName) {
+		this.traderName = traderName;
 	}
 	public String getSide() {
 		return side;
@@ -64,12 +64,12 @@ public class Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public Order(int orderId, String symbol, int traderId, String side,
+	public Order(int orderId, String symbol, String traderName, String side,
 			int qty, float price, String fOK, String condition, String status) {
 		super();
 		this.orderId = orderId;
 		this.symbol = symbol;
-		this.traderId = traderId;
+		this.traderName = traderName;
 		this.side = side;
 		Qty = qty;
 		this.price = price;
@@ -80,7 +80,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", symbol=" + symbol
-				+ ", traderId=" + traderId + ", side=" + side + ", Qty=" + Qty
+				+ ", traderId=" + traderName + ", side=" + side + ", Qty=" + Qty
 				+ ", price=" + price + ", FOK=" + FOK + ", condition="
 				+ condition + ", status=" + status + "]";
 	}

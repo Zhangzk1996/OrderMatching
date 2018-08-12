@@ -10,7 +10,7 @@ public interface TraderService {
 	
 	public void deleteTrader(int traderId);
 	
-	public Trader getTraderInfo(int traderId);
+	public Trader getTraderInfo(String traderName);
 	
 	public List<Trader> getAllTraders();
 	

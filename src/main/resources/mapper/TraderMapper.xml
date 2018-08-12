@@ -13,7 +13,7 @@
     traderID,name,password,email
   </sql>
   
-  <insert id="addTrader" parameterType="java.lang.Integer">
+  <insert id="addTrader" parameterType="Trader">
   	insert into trader(traderID,name,password,email)
   	values(#{traderID,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
   		#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
@@ -23,11 +23,11 @@
   	delete from trader where traderID = #{traderID,jdbcType=INTEGER}
   </delete>
   
-  <select id="getTraderInfo" resultMap="TraderMap" parameterType="java.lang.Integer" >
+  <select id="getTraderInfo" resultMap="TraderMap" parameterType="String" >
     select 
     <include refid="Base_Trader_List" />
     from trader
-    where traderID = #{traderID,jdbcType=INTEGER}
+    where name = #{traderName,jdbcType=INTEGER}
   </select>
  
  <select id="getAllTraders" resultMap="TraderMap" >
