@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team4.dao.MatchOrderMapper" >
+  <resultMap id="MatchOrdertMap" type="MatchOrder" >
+    <id column="matchID" property="matchID" jdbcType="INTEGER" />
+    <result column="symbol" property="symbol" jdbcType="VARCHAR" />
+    <result column="bid_trader_id" property="bid_trader_id" jdbcType="INTEGER" />
+    <result column="ask_trader_id" property="ask_trader_id" jdbcType="INTEGER" />
+    <result column="bid_price" property="bid_price" jdbcType="DECIMAL"></result>
+    <result column="ask_price" property="ask_price" jdbcType="DECIMAL"></result>
+    <result column="bid_size" property="bid_size" jdbcType="DOUBLE"></result>
+    <result column="ask_size" property="ask_size" jdbcType="DOUBLE"></result>
+  </resultMap>
+  
+  <sql id="Base_MatchOrder_List" >
+    matchID,symbol,bid_trader_id,ask_trader_id,bid_price,ask_price,bid_size,ask_size
+  </sql>
+  
+  <select id="getMatchOrderById" resultMap="MatchOrdertMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_MatchOrder_List" />
+    from matchorder
+    where matchID = #{matchID,jdbcType=INTEGER}
+  </select>
+ 
+  <insert id="addMatchOrder" parameterType="MatchOrder" >
+    insert into matchorder (matchID,symbol,bid_trader_id,ask_trader_id,bid_price,ask_price,bid_size,ask_size)
+    values (#{matchID,jdbcType=INTEGER}, #{symbol,jdbcType=VARCHAR}, #{bid_trader_id,jdbcType=INTEGER}, 
+      #{ask_trader_id,jdbcType=INTEGER},#{bid_price,jdbcType=DECIMAL},#{ask_price,jdbcType=DECIMAL},
+     #{bid_size,jdbcType=DOUBLE},#{ask_trader_id,jdbcType=DOUBLE})
+  </insert>
+ 
+ <select id="getAllMatchOrders" resultMap="MatchOrdertMap" >
+    select 
+    <include refid="Base_MatchOrder_List" />
+    from matchorder
+  </select>
+  
+  <select id="getMachOrderCount" resultType="java.lang.Integer">
+    select 
+  	count(*)
+    from matchorder
+  </select>
+  
+</mapper>

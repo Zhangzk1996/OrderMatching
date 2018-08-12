@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team4.dao.OrderMapper" >
+  <resultMap id="OrderMap" type="Order" >
+    <id column="orderID" property="orderId" jdbcType="INTEGER" />
+    <result column="symbol" property="symbol" jdbcType="VARCHAR" />
+    <result column="traderId" property="traderId" jdbcType="INTEGER" />
+    <result column="side" property="side" jdbcType="VARCHAR" />
+    <result column="Qty" property="Qty" jdbcType="INTEGER"></result>
+    <result column="price" property="price" jdbcType="DECIMAL"></result>
+    <result column="FOK" property="FOK" jdbcType="VARCHAR"></result>
+    <result column="condition" property="condition" jdbcType="VARCHAR"></result>
+    <result column="status" property="status" jdbcType="VARCHAR"></result>
+  </resultMap>
+  
+  <sql id="Base_Order_List" >
+    orderID,symbol,traderId,side,Qty,price,FOK,condition,status
+  </sql>
+  
+  <select id="getOrderById" resultMap="OrderMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Order_List" />
+    from order
+    where orderID = #{orderId,jdbcType=INTEGER}
+  </select>
+ 
+  <insert id="addOrder" parameterType="com.team4.pojo.Order" >
+    insert into order (orderID,symbol,traderId,side,Qty,price,FOK,condition,status)
+    values (#{orderID,jdbcType=INTEGER}, #{symbol,jdbcType=VARCHAR}, #{traderId,jdbcType=INTEGER}, 
+      #{side,jdbcType=VARCHAR},#{Qty,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},
+     #{FOK,jdbcType=VARCHAR},#{condition,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
+  </insert>
+ 
+ <select id="getAllOrders" resultMap="OrderMap" >
+    select 
+    <include refid="Base_Order_List" />
+    from order
+  </select>
+  
+  <select id="getOrderCount" resultType="java.lang.Integer">
+    select 
+  	count(*)
+    from order
+  </select>
+  
+  <delete id="deleteOrder" parameterType="java.lang.Integer">
+  	delete from order where orderID = #{orderId,jdbcType=INTEGER}
+  </delete>
+</mapper>
