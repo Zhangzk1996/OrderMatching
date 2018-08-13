@@ -17,20 +17,20 @@
   <select id="getSymbolById" resultMap="SymbolMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Symbol_List" />
-    from symbol
+    from symbols
     where symbolName = #{symbol,jdbcType=VARCHAR}
   </select>
  
  <select id="getAllSymbol" resultMap="SymbolMap" >
     select 
     <include refid="Base_Symbol_List" />
-    from symbol
+    from symbols
   </select>
   
   <select id="getSymbolsByStr" resultMap="SymbolMap" parameterType="java.lang.String">
     select 
     <include refid="Base_Symbol_List" />
-    from symbol
+    from symbols
     where symbolName like concat('%',#{symbol},'%') OR company like concat('%',#{company},'%')
   </select>
   

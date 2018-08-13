@@ -5,7 +5,7 @@
     <id column="traderID" property="traderID" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     
   </resultMap>
   

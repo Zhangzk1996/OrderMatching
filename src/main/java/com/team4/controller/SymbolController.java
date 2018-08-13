@@ -30,7 +30,7 @@ public class SymbolController {
 		
 		List<Symbol> symbolList = symbolService.getAllSymbols();
 		modelAndView.addObject("allSymbol", symbolList);
-		modelAndView.setViewName("symbols/allSymbols");
+		modelAndView.setViewName("index");
 		
 		return modelAndView;
 	}
