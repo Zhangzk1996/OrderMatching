@@ -29,8 +29,8 @@ public class OrderServiceImpl implements OrderService {
 		return order;
 	}
 
-	public List<Order> getAllOrders() {
-		List<Order> orders = orderMapper.getAllOrders();
+	public List<Order> getAllBidOrders() {
+		List<Order> orders = orderMapper.getAllBidOrders("buy");
 		return orders;
 	}
 
@@ -38,6 +38,21 @@ public class OrderServiceImpl implements OrderService {
 		int count = 0;
 		count = orderMapper.getOrderCount();
 		return count;
+	}
+
+	public List<Order> getAllAskOrders() {
+		List<Order> orders = orderMapper.getAllAskOrders("sell");
+		return orders;
+	}
+
+	public List<Order> getBidOrdersBySymbol(String symbol) {
+		List<Order> orders = orderMapper.getBidOrdersBySymbol(symbol);
+		return orders;
+	}
+
+	public List<Order> getAskOrdersBySymbol(String symbol) {
+		List<Order> orders = orderMapper.getAskOrdersBySymbol(symbol);
+		return orders;
 	}
 
 }

@@ -8,7 +8,7 @@ public interface MatchOrderMapper {
 	
 	public void addMatchOrder(MatchOrder matchOrder);
 	
-	public MatchOrder getMatchOrderById(int matchOrderId);
+	public MatchOrder getMatchOrderById(String matchOrderId);
 	
 	public List<MatchOrder> getAllMatchOrders();
 	

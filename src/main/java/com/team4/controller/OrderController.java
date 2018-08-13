@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,15 +44,24 @@ public class OrderController {
 		return new ModelAndView("redirect:"+url);
 	}
 	
+	@RequestMapping(value = "/symbolOrders/{symbol}")
+	public ModelAndView searchOrders(HttpServletRequest request, @PathVariable("symbol")String symbol) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		List<Order> symbolOrders = orderService.getBidOrdersBySymbol(symbol);
+		symbolOrders.addAll(orderService.getAskOrdersBySymbol(symbol));
+		modelAndView.addObject("symbolOrders", symbolOrders);
+		modelAndView.setViewName("/order/symbolOrders");
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = "/allOrders")
 	public ModelAndView allOrders(HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
-		List<Order> allOrders = orderService.getAllOrders();
+		List<Order> allOrders = orderService.getAllBidOrders();
+		allOrders.addAll(orderService.getAllAskOrders());
 		modelAndView.addObject("allOrders", allOrders);
 		modelAndView.setViewName("/order/allOrders");
 		return modelAndView;
 	}
-	
-	
 	
 }

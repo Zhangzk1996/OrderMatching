@@ -20,7 +20,7 @@ public class MatchOrderServiceImpl implements MatchOrderService {
 		matchOrderMapper.addMatchOrder(matchOrder);
 	}
 
-	public MatchOrder getMatchOrderById(int matchOrderId) {
+	public MatchOrder getMatchOrderById(String matchOrderId) {
 		MatchOrder matchOrder = matchOrderMapper.getMatchOrderById(matchOrderId);
 		return matchOrder;
 	}

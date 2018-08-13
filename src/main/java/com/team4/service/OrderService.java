@@ -12,7 +12,13 @@ public interface OrderService {
 	
 	public Order getOrderById(int orderId);
 	
-	public List<Order> getAllOrders();
+	public List<Order> getAllBidOrders();
+	
+	public List<Order> getAllAskOrders();
+	
+	public List<Order> getBidOrdersBySymbol(String symbol);
+	
+	public List<Order> getAskOrdersBySymbol(String symbol);
 	
 	public int getOrderCount();
 	

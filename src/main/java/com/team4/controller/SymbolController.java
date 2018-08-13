@@ -36,7 +36,7 @@ public class SymbolController {
 	}
 	
 	/**
-	 * 显示所有symbol
+	 * 查询指定symbol
 	 */
 	@RequestMapping(value = "/search", method=RequestMethod.POST)
 	public ModelAndView searchSymbolByName(HttpServletRequest request, @RequestParam(value = "symbol",required = false) String symbol) throws Exception {
