@@ -4,17 +4,18 @@
 	<resultMap id="OrderMap" type="Order">
 		<id column="orderID" property="orderId" jdbcType="INTEGER" />
 		<result column="symbol" property="symbol" jdbcType="VARCHAR" />
-		<result column="traderId" property="traderId" jdbcType="INTEGER" />
+		<result column="traderName" property="traderName" jdbcType="VARCHAR" />
 		<result column="side" property="side" jdbcType="VARCHAR" />
 		<result column="Qty" property="Qty" jdbcType="INTEGER"></result>
 		<result column="price" property="price" jdbcType="DECIMAL"></result>
 		<result column="FOK" property="FOK" jdbcType="VARCHAR"></result>
 		<result column="condition" property="condition" jdbcType="VARCHAR"></result>
 		<result column="status" property="status" jdbcType="VARCHAR"></result>
+		<result column="otherPrice" property="otherPrice" jdbcType="DECIMAL"></result>
 	</resultMap>
 
 	<sql id="Base_Order_List">
-		orderID,symbol,traderId,side,Qty,price,FOK,condition,status
+		orderID,symbol,traderName,side,Qty,price,FOK,condition,status,otherPrice
 	</sql>
 
 	<select id="getOrderById" resultMap="OrderMap" parameterType="java.lang.Integer">
@@ -26,37 +27,42 @@
 
 	<insert id="addOrder" parameterType="com.team4.pojo.Order">
 		insert into orders
-		(orderID,symbol,traderId,side,Qty,price,FOK,condition,status)
+		(orderID,symbol,traderName,side,Qty,price,FOK,condition,status,otherPrice)
 		values (#{orderID,jdbcType=INTEGER}, #{symbol,jdbcType=VARCHAR},
-		#{traderId,jdbcType=INTEGER},
-		#{side,jdbcType=VARCHAR},#{Qty,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},
-		#{FOK,jdbcType=VARCHAR},#{condition,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR})
+		#{traderName,jdbcType=VARCHAR},#{side,jdbcType=VARCHAR},
+		#{Qty,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},
+		#{FOK,jdbcType=VARCHAR},#{condition,jdbcType=VARCHAR},
+		#{status,jdbcType=VARCHAR},#{otherPrice,jdbcType=DECIMAL})
 	</insert>
 
 	<select id="getAllBidOrders" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
-		from orders where side = #{side,jdbcType=VARCHAR} order by price desc
+		from orders where side = #{side,jdbcType=VARCHAR}
+		order by price desc
 	</select>
 
 	<select id="getAllAskOrders" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
-		from orders where side = #{side,jdbcType=VARCHAR} order by price asc
+		from orders where side = #{side,jdbcType=VARCHAR}
+		order by price asc
 	</select>
 
 	<select id="getBidOrdersBySymbol" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where symbol = #{symbol,jdbcType=VARCHAR} order by price desc
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = #{side,jdbcType=VARCHAR}
+		order by price desc
 	</select>
 
 	<select id="getAskOrdersBySymbol" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where symbol = #{symbol,jdbcType=VARCHAR} order by price asc
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = #{side,jdbcType=VARCHAR}
+		order by price asc
 	</select>
 
 	<select id="getOrderCount" resultType="java.lang.Integer">

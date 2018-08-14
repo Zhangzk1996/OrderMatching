@@ -128,10 +128,10 @@ public class MatchOrderController {
 		MatchOrder matchOrder = new MatchOrder();
 		matchOrder.setMatchID(bid.getOrderId() + "_" + ask.getOrderId());
 		matchOrder.setSymbol(bid.getSymbol());
-		matchOrder.setBid_trader_id(bid.getOrderId());
+		matchOrder.setBid_trader_name(bid.getTraderName());
 		matchOrder.setBid_price(bid.getPrice());
 		matchOrder.setBid_size(bid.getQty());
-		matchOrder.setAsk_trdaer_id(ask.getOrderId());
+		matchOrder.setAsk_trdaer_name(ask.getTraderName());
 		matchOrder.setAsk_price(ask.getPrice());
 		matchOrder.setAsk_size(ask.getQty());
 		matchOrderService.addMatchOrder(matchOrder);

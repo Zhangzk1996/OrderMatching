@@ -3,12 +3,12 @@ package com.team4.pojo;
 public class MatchOrder {
 	private String matchID;
 	private String symbol;
-	private int bid_trader_id;
-	private int ask_trdaer_id;
-	private float bid_price;
-	private float ask_price;
-	private double bid_size;
-	private double ask_size;
+	private String bid_trader_name;
+	private String ask_trdaer_name;
+	private double bid_price;
+	private double ask_price;
+	private int bid_size;
+	private int ask_size;
 
 	public String getMatchID() {
 		return matchID;
@@ -26,51 +26,51 @@ public class MatchOrder {
 		this.symbol = symbol;
 	}
 
-	public int getBid_trader_id() {
-		return bid_trader_id;
+	public String getBid_trader_name() {
+		return bid_trader_name;
 	}
 
-	public void setBid_trader_id(int bid_trader_id) {
-		this.bid_trader_id = bid_trader_id;
+	public void setBid_trader_name(String bid_trader_name) {
+		this.bid_trader_name = bid_trader_name;
 	}
 
-	public int getAsk_trdaer_id() {
-		return ask_trdaer_id;
+	public String getAsk_trdaer_name() {
+		return ask_trdaer_name;
 	}
 
-	public void setAsk_trdaer_id(int ask_trdaer_id) {
-		this.ask_trdaer_id = ask_trdaer_id;
+	public void setAsk_trdaer_name(String ask_trdaer_name) {
+		this.ask_trdaer_name = ask_trdaer_name;
 	}
 
-	public float getBid_price() {
+	public double getBid_price() {
 		return bid_price;
 	}
 
-	public void setBid_price(float bid_price) {
+	public void setBid_price(double bid_price) {
 		this.bid_price = bid_price;
 	}
 
-	public float getAsk_price() {
+	public double getAsk_price() {
 		return ask_price;
 	}
 
-	public void setAsk_price(float ask_price) {
+	public void setAsk_price(double ask_price) {
 		this.ask_price = ask_price;
 	}
 
-	public double getBid_size() {
+	public int getBid_size() {
 		return bid_size;
 	}
 
-	public void setBid_size(double bid_size) {
+	public void setBid_size(int bid_size) {
 		this.bid_size = bid_size;
 	}
 
-	public double getAsk_size() {
+	public int getAsk_size() {
 		return ask_size;
 	}
 
-	public void setAsk_size(double ask_size) {
+	public void setAsk_size(int ask_size) {
 		this.ask_size = ask_size;
 	}
 
@@ -89,8 +89,8 @@ public class MatchOrder {
 	// }
 	@Override
 	public String toString() {
-		return "MatchOrder [matchID=" + matchID + ", symbol=" + symbol + ", bid_trader_id=" + bid_trader_id
-				+ ", ask_trdaer_id=" + ask_trdaer_id + ", bid_price=" + bid_price + ", ask_price=" + ask_price
+		return "MatchOrder [matchID=" + matchID + ", symbol=" + symbol + ", bid_trader_id=" + bid_trader_name
+				+ ", ask_trdaer_id=" + ask_trdaer_name + ", bid_price=" + bid_price + ", ask_price=" + ask_price
 				+ ", bid_size=" + bid_size + ", ask_size=" + ask_size + "]";
 	}
 

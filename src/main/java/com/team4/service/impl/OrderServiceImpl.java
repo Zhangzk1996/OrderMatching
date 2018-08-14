@@ -20,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
 		orderMapper.addOrder(order);
 	}
 
-	public void deleteOrder(int orderId) {
-		orderMapper.deleteOrder(orderId);
+	public void deleteOrder(int orderId, String status) {
+		orderMapper.deleteOrder(orderId, status);
 	}
 
 	public Order getOrderById(int orderId) {
@@ -46,12 +46,12 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<Order> getBidOrdersBySymbol(String symbol) {
-		List<Order> orders = orderMapper.getBidOrdersBySymbol(symbol);
+		List<Order> orders = orderMapper.getBidOrdersBySymbol(symbol, "buy");
 		return orders;
 	}
 
 	public List<Order> getAskOrdersBySymbol(String symbol) {
-		List<Order> orders = orderMapper.getAskOrdersBySymbol(symbol);
+		List<Order> orders = orderMapper.getAskOrdersBySymbol(symbol, "side");
 		return orders;
 	}
 

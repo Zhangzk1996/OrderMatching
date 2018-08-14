@@ -27,9 +27,10 @@ public class OrderController {
 		String url = request.getHeader("Referer");
 		Trader trader = (Trader) request.getSession().getAttribute("cur_trader");
 		String symbol = (String) request.getSession().getAttribute("cur_symbol");
-		order.setTraderId(trader.getName());
+		order.setTraderName(trader.getName());
 		order.setSymbol(symbol);
 		order.setStatus("alive");
+		
 		orderService.addOrder(order);
 		return new ModelAndView("redirect:" + url);
 	}
@@ -39,7 +40,7 @@ public class OrderController {
 		String url=request.getHeader("Referer");
 		Order cur_order = (Order) request.getSession().getAttribute("cur_order");
 		cur_order.setStatus("deleted");
-		orderService.deleteOrder(cur_order.getOrderId());
+		orderService.deleteOrder(cur_order.getOrderId(), cur_order.getStatus());
 		request.getSession().setAttribute("cur_order", cur_order);
 		return new ModelAndView("redirect:"+url);
 	}
