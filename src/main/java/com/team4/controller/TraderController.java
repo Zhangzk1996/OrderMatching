@@ -18,7 +18,7 @@ import com.team4.service.TraderService;
 import com.team4.util.MD5;
 
 @Controller
-@RequestMapping(value = "trader")
+@RequestMapping(value = "/trader")
 public class TraderController {
 	
 	@Autowired
@@ -35,7 +35,7 @@ public class TraderController {
 	public ModelAndView addTrader(HttpServletRequest request, @ModelAttribute("trader") Trader trader1) throws Exception {
 		String url = request.getHeader("Referer");
 		Trader trader = traderService.getTraderInfo(trader1.getTraderName());
-		if (trader != null) {
+		if (trader == null) {
 			// 对密码进行加密
 			String pass = MD5.md5(trader1.getPassword());
 			trader1.setPassword(pass);
@@ -44,20 +44,26 @@ public class TraderController {
 		if (trader != null) {
 			System.out.println("The trader name has been used! Please change nama to try again!");
 		}
-		return new ModelAndView("redirect:/login");
+		return new ModelAndView("redirect:/main/login");
 	}
 	
 	@RequestMapping(value = "/login")
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response,Trader trader, ModelMap modelMap) throws Exception {
-		Trader cur_trader = traderService.getTraderInfo(trader.getTraderName());
+	public ModelAndView loginValid(HttpServletRequest request, HttpServletResponse response, Trader trader, ModelMap modelMap) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		Trader cur_trader = traderService.getTraderInfo(trader.getEmail());
 		if (cur_trader != null) {
 			String pwd = MD5.md5(trader.getPassword());
 			if (pwd.equals(cur_trader.getPassword())) {
 				request.getSession().setAttribute("cur_trader", cur_trader);
-				return new ModelAndView("redirect:/mainPage");
+				modelAndView.setViewName("/mainPage");
+				System.out.println("1111111111111");
+			} else {
+				modelAndView.setViewName("/mainPage");
+				System.out.println("22222222");
 			}
+			System.out.println("333333333");
 		}
-		return new ModelAndView("redirect:/mainPage");
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/deleteTrader")

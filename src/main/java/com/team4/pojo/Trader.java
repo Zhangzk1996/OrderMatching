@@ -29,13 +29,13 @@ public class Trader {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Trader(int traderID, String traderName, String password, String email) {
-		super();
-		this.traderID = traderID;
-		this.traderName = traderName;
-		this.password = password;
-		this.email = email;
-	}
+//	public Trader(int traderID, String traderName, String password, String email) {
+//		super();
+//		this.traderID = traderID;
+//		this.traderName = traderName;
+//		this.password = password;
+//		this.email = email;
+//	}
 	@Override
 	public String toString() {
 		return "Trader [traderID=" + traderID + ", traderName=" + traderName

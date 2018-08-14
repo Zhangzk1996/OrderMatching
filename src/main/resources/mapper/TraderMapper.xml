@@ -14,20 +14,20 @@
   </sql>
   
   <insert id="addTrader" parameterType="Trader">
-  	insert into trader(traderID,traderName,password,email)
-  	values(#{traderID,jdbcType=INTEGER},#{traderName,jdbcType=VARCHAR}
+  	insert into traders(traderID,traderName,password,email)
+  	values(#{traderID,jdbcType=INTEGER},#{traderName,jdbcType=VARCHAR},
   		#{password,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR})
   </insert>
   
   <delete id="deleteTrader" parameterType="java.lang.Integer">
-  	delete from trader where traderID = #{traderID,jdbcType=INTEGER}
+  	delete from traders where traderID = #{traderID,jdbcType=INTEGER}
   </delete>
   
   <select id="getTraderInfo" resultMap="TraderMap" parameterType="String" >
     select 
     <include refid="Base_Trader_List" />
     from traders
-    where traderName = #{traderName,jdbcType=INTEGER}
+    where email = #{email,jdbcType=VARCHAR}
   </select>
  
  <select id="getAllTraders" resultMap="TraderMap" >

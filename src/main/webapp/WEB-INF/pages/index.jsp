@@ -12,10 +12,11 @@
 <html>
 <head>
     <title>Welcome</title>
-    <!-- <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=goods/homeGoods"> -->
+    <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=main/login"> 
 </head>
 <body>
 <h1>Hello World!</h1>
+<!-- <a href="<%=basePath %>symbols/allSymbols">page</a>
 <div class="waterfoo stark-components row">
         <div class="item-wrapper normal">
             <c:forEach var="item" items="${allSymbol}">
@@ -36,6 +37,6 @@
                 </div>
             </c:forEach>
         </div>
-    </div>
+    </div> -->
 </body>
 </html>

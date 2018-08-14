@@ -8,8 +8,8 @@ public class Order {
 	private int Qty;
 	private double price;
 	private String FOK;
-	private String condition;
-	private String status;
+	private String cond;
+	private String sta;
 	private double otherPrice;
 
 	public int getOrderId() {
@@ -68,20 +68,20 @@ public class Order {
 		FOK = fOK;
 	}
 
-	public String getCondition() {
-		return condition;
+	public String getCond() {
+		return cond;
 	}
 
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setCond(String cond) {
+		this.cond = cond;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getSta() {
+		return sta;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setSta(String sta) {
+		this.sta = sta;
 	}
 
 	public double getOtherPrice() {
@@ -92,26 +92,26 @@ public class Order {
 		this.otherPrice = otherPrice;
 	}
 
-	public Order(int orderId, String symbol, String traderName, String side, int qty, double price, String fOK,
-			String condition, String status,double otherPrice) {
-		super();
-		this.orderId = orderId;
-		this.symbol = symbol;
-		this.traderName = traderName;
-		this.side = side;
-		Qty = qty;
-		this.price = price;
-		FOK = fOK;
-		this.condition = condition;
-		this.status = status;
-		this.otherPrice = otherPrice;
-	}
+//	public Order(int orderId, String symbol, String traderName, String side, int qty, double price, String fOK,
+//			String condition, String status,double otherPrice) {
+//		super();
+//		this.orderId = orderId;
+//		this.symbol = symbol;
+//		this.traderName = traderName;
+//		this.side = side;
+//		Qty = qty;
+//		this.price = price;
+//		FOK = fOK;
+//		this.condition = condition;
+//		this.status = status;
+//		this.otherPrice = otherPrice;
+//	}
 
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", symbol=" + symbol + ", traderId=" + traderName + ", side=" + side
-				+ ", Qty=" + Qty + ", price=" + price + ", FOK=" + FOK + ", condition=" + condition + ", status="
-				+ status + ", otherPrice=" + otherPrice + "]";
+				+ ", Qty=" + Qty + ", price=" + price + ", FOK=" + FOK + ", condition=" + cond + ", status="
+				+ sta + ", otherPrice=" + otherPrice + "]";
 	}
 
 }

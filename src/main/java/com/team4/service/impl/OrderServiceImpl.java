@@ -51,7 +51,17 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	public List<Order> getAskOrdersBySymbol(String symbol) {
-		List<Order> orders = orderMapper.getAskOrdersBySymbol(symbol, "side");
+		List<Order> orders = orderMapper.getAskOrdersBySymbol(symbol, "sell");
+		return orders;
+	}
+
+	public List<Order> getBidOrdersByTrader(String traderName) {
+		List<Order> orders = orderMapper.getBidOrdersByTrader(traderName);
+		return orders;
+	}
+
+	public List<Order> getAskOrdersByTrader(String traderName) {
+		List<Order> orders = orderMapper.getAskOrdersByTrader(traderName);
 		return orders;
 	}
 
