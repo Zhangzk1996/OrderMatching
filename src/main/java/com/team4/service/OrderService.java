@@ -23,6 +23,10 @@ public interface OrderService {
 	public List<Order> getBidOrdersByTrader(String traderName);
 
 	public List<Order> getAskOrdersByTrader(String traderName);
+	
+	public List<Order> getMaxBidOrdersBySymbol(String symbol);
+
+	public List<Order> getMinAskOrdersBySymbol(String symbol);
 
 	public int getOrderCount();
 

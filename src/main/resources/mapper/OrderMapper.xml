@@ -65,6 +65,22 @@
 		order by price asc
 	</select>
 	
+	<select id="getMaxBidOrdersBySymbol" resultMap="OrderMap" parameterType="String">
+		select
+		<include refid="Base_Order_List" />
+		from orders
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = "buy"
+		and price = (select max(price) from orders where symbol = #{symbol,jdbcType=VARCHAR} and side = "buy")
+	</select>
+
+	<select id="getMinAskOrdersBySymbol" resultMap="OrderMap" parameterType="String">
+		select
+		<include refid="Base_Order_List" />
+		from orders
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = "sell"
+		and price = (select min(price) from orders where symbol = #{symbol,jdbcType=VARCHAR} and side = "sell")
+	</select>
+	
 	<select id="getBidOrdersByTrader" resultMap="OrderMap">
 		select
 		<include refid="Base_Order_List" />

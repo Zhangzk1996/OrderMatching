@@ -58,7 +58,7 @@ public class TraderController {
 				modelAndView.setViewName("/mainPage");
 				System.out.println("1111111111111");
 			} else {
-				modelAndView.setViewName("/mainPage");
+				modelAndView.setViewName("/login");
 				System.out.println("22222222");
 			}
 			System.out.println("333333333");

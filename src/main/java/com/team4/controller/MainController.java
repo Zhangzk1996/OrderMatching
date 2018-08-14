@@ -1,5 +1,6 @@
 package com.team4.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.pojo.MatchOrder;
 import com.team4.pojo.Order;
 import com.team4.pojo.Symbol;
 import com.team4.pojo.Trader;
@@ -20,6 +22,7 @@ import com.team4.service.OrderService;
 import com.team4.service.SymbolService;
 import com.team4.service.TraderService;
 import com.team4.util.MD5;
+import com.team4.util.MatchOrderGrid;
 import com.team4.util.OrderGrid;
 import com.team4.util.SymbolGrid;
 
@@ -101,6 +104,67 @@ public class MainController {
 		orderGrid.setRows(list);
 		orderGrid.setTotal(total);
 		return orderGrid;
+	}
+	
+	@RequestMapping(value = "/leve1", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public MatchOrderGrid leve1(HttpServletRequest request, @RequestParam("current") int current,
+			@RequestParam("rowCount") int rowCount) throws Exception {
+//		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("44444444444444444444");
+		List<MatchOrder> leve1Orders = new ArrayList<MatchOrder>();
+		List<Symbol> symbols = symbolService.getAllSymbol();
+		System.out.println("555555555555555555555");
+		for (Symbol symbol : symbols) {
+			System.out.println("66666666666666666666");
+			List<Order> maxBid = orderService.getMaxBidOrdersBySymbol(symbol.getSymbol());
+			List<Order> minAsk = orderService.getMinAskOrdersBySymbol(symbol.getSymbol());
+			int i = 0;
+			for (i = 0; i < maxBid.size(); i++) {
+				System.out.println("777777777777777777777");
+				MatchOrder matchOrder = new MatchOrder();
+				Order bidOrder = maxBid.get(i);
+				matchOrder.setMatchID("" + bidOrder.getOrderId() + "_");
+				matchOrder.setBid_trader_name(bidOrder.getTraderName());
+				matchOrder.setBid_price(bidOrder.getPrice());
+				matchOrder.setBid_size(bidOrder.getQty());
+				Order askOrder = minAsk.get(i);
+				if (askOrder != null) {
+					matchOrder.setMatchID(matchOrder.getMatchID() + askOrder.getOrderId());
+					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
+					matchOrder.setAsk_price(askOrder.getPrice());
+					matchOrder.setAsk_size(askOrder.getQty());
+				}
+				leve1Orders.add(matchOrder);
+			}
+			if (i < minAsk.size()) {
+				for (int j = i ; j < minAsk.size(); j++) {
+					MatchOrder matchOrder = new MatchOrder();
+					Order askOrder = minAsk.get(i);
+					matchOrder.setMatchID("_" + askOrder.getOrderId());
+					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
+					matchOrder.setAsk_price(askOrder.getPrice());
+					matchOrder.setAsk_size(askOrder.getQty());
+					leve1Orders.add(matchOrder);
+				}
+			}
+		}
+//		modelAndView.setViewName("/mainPage");
+//		return modelAndView;
+		MatchOrderGrid matchOrderGrid = new MatchOrderGrid();
+		matchOrderGrid.setCurrent(current);
+		matchOrderGrid.setRowCount(rowCount);
+		matchOrderGrid.setRows(leve1Orders);
+		matchOrderGrid.setTotal(leve1Orders.size());
+		System.out.println("8888888888888888888888888");
+		return matchOrderGrid;
+	}
+	
+	@RequestMapping(value = "/leve2")
+	public ModelAndView leve2(HttpServletRequest request) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/mainPage");
+		return modelAndView;
 	}
 
 }

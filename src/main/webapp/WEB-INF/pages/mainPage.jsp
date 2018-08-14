@@ -168,6 +168,7 @@
 						</ul>
 					</div>
 				</div>
+			</div>
 		</nav>
 
 		<div class="shell" style="float: left; width: 30%">
@@ -285,13 +286,13 @@
 					class="levelLink" id="SecondLevel" onclick="showLevel2()">Level
 					2</a>
 			</div>
-			<div class="matchOrderList" id="matchOrderListLevel1"
+			<div class="matchOrderListLevel1" id="matchOrderListLevel1"
 				style="margin-top: 20px;">
 				<table id="grid-data"
 					class="table table-condensed table-hover table-striped">
 					<thead>
 						<tr>
-							<th data-column-id="matchOrderId" data-identifier="true"
+							<th data-column-id="matchID" data-identifier="true"
 								data-type="numeric">ID</th>
 							<th data-column-id="symbol">Symbol 1</th>
 							<th data-column-id="bid_price">Bid</th>
@@ -304,13 +305,13 @@
 					</thead>
 				</table>
 			</div>
-			<div class="matchOrderList" id="matchOrderListLevel2"
+			<div class="matchOrderListLevel2" id="matchOrderListLevel2"
 				style="margin-top: 20px; display: none">
 				<table id="grid-data2"
 					class="table table-condensed table-hover table-striped">
 					<thead>
 						<tr>
-							<th data-column-id="matchOrderId" data-identifier="true"
+							<th data-column-id="matchID" data-identifier="true"
 								data-type="numeric">ID</th>
 							<th data-column-id="symbol">Symbol 2</th>
 							<th data-column-id="bid_price">Bid</th>
@@ -337,7 +338,7 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"#",
+            url:"../main/leve1",
 			// <%=basePath%>order/orderList
             formatters: {
                 "commands": function(column, row)
@@ -350,7 +351,7 @@
             grid.find(".command-delete").on("click", function(e)
             {
               		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath%>matchOrder/deleteMatchOrder",{userId:$(this).data("row-id")},function(){
+             		$.post("<%=basePath%>order/deleteOrder",{userId:$(this).data("row-id")},function(){
                     	alert("Delete Done");
                     	$("#grid-data").bootgrid("reload");
                 }); 
@@ -367,7 +368,7 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"#",
+            url:"<%=basePath%>main/leve1",
 			// <%=basePath%>order/orderList
             formatters: {
                 "commands": function(column, row)
@@ -380,8 +381,7 @@
             grid.find(".command-delete").on("click", function(e)
             {
               		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath%>
-		matchOrder/deleteMatchOrder",
+             		$.post("<%=basePath%>order/deleteOrder",
 																					{
 																						userId : $(
 																								this)

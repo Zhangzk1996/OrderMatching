@@ -65,4 +65,14 @@ public class OrderServiceImpl implements OrderService {
 		return orders;
 	}
 
+	public List<Order> getMaxBidOrdersBySymbol(String symbol) {
+		List<Order> orders = orderMapper.getMaxBidOrdersBySymbol(symbol);
+		return orders;
+	}
+
+	public List<Order> getMinAskOrdersBySymbol(String symbol) {
+		List<Order> orders = orderMapper.getMinAskOrdersBySymbol(symbol);
+		return orders;
+	}
+
 }

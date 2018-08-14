@@ -25,6 +25,10 @@ public interface OrderMapper {
 	public List<Order> getBidOrdersByTrader(@Param("traderName")String traderName);
 
 	public List<Order> getAskOrdersByTrader(@Param("traderName")String traderName);
+	
+	public List<Order> getMaxBidOrdersBySymbol(@Param("symbol")String symbol);
+
+	public List<Order> getMinAskOrdersBySymbol(@Param("symbol")String symbol);
 
 	public int getOrderCount();
 
