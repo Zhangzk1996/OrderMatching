@@ -6,9 +6,9 @@
 		<result column="symbol" property="symbol" jdbcType="VARCHAR" />
 		<result column="traderName" property="traderName" jdbcType="VARCHAR" />
 		<result column="side" property="side" jdbcType="VARCHAR" />
-		<result column="Qty" property="Qty" jdbcType="INTEGER"></result>
+		<result column="Qty" property="qty" jdbcType="INTEGER"></result>
 		<result column="price" property="price" jdbcType="DOUBLE"></result>
-		<result column="FOK" property="FOK" jdbcType="VARCHAR"></result>
+		<result column="FOK" property="fok" jdbcType="VARCHAR"></result>
 		<result column="cond" property="cond" jdbcType="VARCHAR"></result>
 		<result column="sta" property="sta" jdbcType="VARCHAR"></result>
 		<result column="otherPrice" property="otherPrice" jdbcType="DOUBLE"></result>
@@ -30,8 +30,8 @@
 		(orderId,symbol,traderName,side,Qty,price,FOK,cond,sta,otherPrice)
 		values (#{orderId,jdbcType=INTEGER}, #{symbol,jdbcType=VARCHAR},
 		#{traderName,jdbcType=VARCHAR},#{side,jdbcType=VARCHAR},
-		#{Qty,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},
-		#{FOK,jdbcType=VARCHAR},#{cond,jdbcType=VARCHAR},
+		#{qty,jdbcType=INTEGER},#{price,jdbcType=DECIMAL},
+		#{fok,jdbcType=VARCHAR},#{cond,jdbcType=VARCHAR},
 		#{sta,jdbcType=VARCHAR},#{otherPrice,jdbcType=DECIMAL})
 	</insert>
 

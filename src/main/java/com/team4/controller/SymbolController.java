@@ -28,7 +28,7 @@ public class SymbolController {
 	public ModelAndView allSymbols(HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		List<Symbol> symbolList = symbolService.getAllSymbols();
+		List<Symbol> symbolList = symbolService.getAllSymbol();
 		modelAndView.addObject("allSymbol", symbolList);
 		modelAndView.setViewName("/login");
 		

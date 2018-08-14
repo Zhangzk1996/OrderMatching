@@ -57,10 +57,10 @@
 						</button>
 						<a class="navbar-brand" href="<%=basePath%>main/mainPage">Order Matching</a>
 					</div>
-					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-left:800px">
 						<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1"
-						style="position: fixed; right: 60px;">
+						style="right: 60px;">
 						<ul class="nav navbar-nav">
 							<li><a>${cur_trader.traderName}</a></li>
 							<li><a href="<%=basePath%>main/logout">logout</a></li>
@@ -85,13 +85,13 @@
 					<tr>
 						<th data-column-id="orderId"  data-identifier="true" data-type="numeric">ID</th>
 						<th data-column-id="symbol">symbol</th>
-						<th data-column-id="traderId">traderId</th>
+						<th data-column-id="traderName">traderName</th>
 						<th data-column-id="side">side</th>
-						<th data-column-id="Qty">Qty</th>
+						<th data-column-id="qty">Qty</th>
 						<th data-column-id="price">price</th>
-						<th data-column-id="FOK">FOK</th>
-						<th data-column-id="condition">condition</th>
-						<th data-column-id="status">status</th>
+						<th data-column-id="fok">FOK</th>
+						<th data-column-id="cond">condition</th>
+						<th data-column-id="sta">status</th>
 						<th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
 					</tr>
 					</thead>
@@ -124,7 +124,7 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"#",
+            url:"<%=basePath %>main/allOrders",
 			// <%=basePath %>order/orderList
             formatters: {
                 "commands": function(column, row)
@@ -154,7 +154,7 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"#",
+            url:"<%=basePath %>main/allSymbols",
 			// <%=basePath %>symbol/symbolList
             formatters: {
                 "commands": function(column, row)

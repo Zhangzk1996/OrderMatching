@@ -5,9 +5,9 @@ public class Order {
 	private String symbol;
 	private String traderName;
 	private String side;
-	private int Qty;
+	private int qty;
 	private double price;
-	private String FOK;
+	private String fok;
 	private String cond;
 	private String sta;
 	private double otherPrice;
@@ -45,11 +45,11 @@ public class Order {
 	}
 
 	public int getQty() {
-		return Qty;
+		return qty;
 	}
 
 	public void setQty(int qty) {
-		Qty = qty;
+		this.qty = qty;
 	}
 
 	public double getPrice() {
@@ -60,12 +60,16 @@ public class Order {
 		this.price = price;
 	}
 
-	public String getFOK() {
-		return FOK;
+	public String getFok() {
+		return fok;
 	}
 
-	public void setFOK(String fOK) {
-		FOK = fOK;
+	public void setFok(String fok) {
+		this.fok = fok;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public String getCond() {
@@ -110,7 +114,7 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", symbol=" + symbol + ", traderId=" + traderName + ", side=" + side
-				+ ", Qty=" + Qty + ", price=" + price + ", FOK=" + FOK + ", condition=" + cond + ", status="
+				+ ", Qty=" + qty + ", price=" + price + ", FOK=" + fok + ", condition=" + cond + ", status="
 				+ sta + ", otherPrice=" + otherPrice + "]";
 	}
 

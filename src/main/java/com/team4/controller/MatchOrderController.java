@@ -47,12 +47,12 @@ public class MatchOrderController {
 					if (o.getQty() == order.getQty()) {
 						modelAndView = matchSuccessOperation(request, order, o);
 					} else if(o.getQty() > order.getQty()) {
-						if (o.getFOK().equals("fill")) {
+						if (o.getFok().equals("fill")) {
 							modelAndView = matchSuccessOperation(request, order, o);
 							o.setQty(o.getQty() - order.getQty());
 						}
 					}else {
-						if (order.getFOK().equals("fill")) {
+						if (order.getFok().equals("fill")) {
 							modelAndView = matchSuccessOperation(request, order, o);
 							order.setQty(order.getQty() - o.getQty());
 						}
@@ -66,12 +66,12 @@ public class MatchOrderController {
 					if (o.getQty() == order.getQty()) {
 						modelAndView = matchSuccessOperation(request, o, order);
 					} else if (o.getQty() > order.getQty()){
-						if (o.getFOK().equals("fill")) {
+						if (o.getFok().equals("fill")) {
 							modelAndView = matchSuccessOperation(request, o, order);
 							o.setQty(o.getQty() - order.getQty());
 						}
 					} else {
-						if (order.getFOK().equals("fill")) {
+						if (order.getFok().equals("fill")) {
 							modelAndView = matchSuccessOperation(request, o, order);
 							order.setQty(order.getQty() - o.getQty());
 						}

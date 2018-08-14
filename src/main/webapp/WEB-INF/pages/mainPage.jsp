@@ -156,10 +156,9 @@
 						Matching System </a>
 				</div>
 				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1" style="margin-left:800px;">
+					id="bs-example-navbar-collapse-1" style="margin-left: 800px;">
 					<div class="collapse navbar-collapse"
-						id="bs-example-navbar-collapse-1"
-						style="right: 60px;">
+						id="bs-example-navbar-collapse-1" style="right: 60px;">
 						<ul class="nav navbar-nav">
 							<li><a
 								href="<%=basePath%>order/traderOrders/${cur_trader.traderName}">My
@@ -181,11 +180,12 @@
 						<div class="range offset-top-22">
 							<div class="cell-sm-6 offset-top-45 offset-sm-top-0">
 								<div class="form-group">
-									<label for="traderName" class="form-label">traderName</label>
-									<input
+									<label for="traderName" class="form-label">traderName</label> <input
 										id="traderName" type="text" name="traderName"
 										data-constraints="@Required" placeholder="traderName"
-										class="form-control" value=${cur_trader.traderName} readOnly=true>
+										class="form-control"
+										value=${cur_trader.traderName
+										} readOnly=true>
 								</div>
 							</div>
 							<div class="cell-sm-6">
@@ -218,9 +218,10 @@
 							</div>
 							<div class="cell-sm-6 offset-top-45">
 								<div class="form-group date">
-									<label for="Qty" class="form-label">Qty</label> <input id="Qty" name="Qty"
-										type="text" data-time-picker="date" placeholder="Qty"
-										data-constraints="@Required" class="form-control"><span
+									<label for="qty" class="form-label">Qty</label> <input id="qty"
+										name="qty" type="text" data-time-picker="date"
+										placeholder="qty" data-constraints="@Required"
+										class="form-control"><span
 										class="material-icons-event icon icon-md icon-primary"></span>
 								</div>
 							</div>
@@ -236,8 +237,8 @@
 							<div class="cell-xs-6 cell-md-3 offset-top-45">
 								<div class="form-group">
 									<!--Select 2-->
-									<label for="FOK" class="form-label">FOK</label> <select
-										id="FOK" name="FOK" data-placeholder="-"
+									<label for="fok" class="form-label">FOK</label> <select
+										id="fok" name="fok" data-placeholder="-"
 										data-minimum-results-for-search="Infinity"
 										class="form-control select-filter">
 										<option>-</option>

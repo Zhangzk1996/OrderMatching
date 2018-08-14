@@ -8,8 +8,10 @@ public interface SymbolService {
 	
 	public Symbol getSymbolById(String symbol);
 	
-	public List<Symbol> getAllSymbols();
+	public List<Symbol> getAllSymbol();
 	
 	public List<Symbol> getSymbolsByStr(String str);
+
+	public List<Symbol> getPageSymbols(int current, int rowCount);
 
 }
