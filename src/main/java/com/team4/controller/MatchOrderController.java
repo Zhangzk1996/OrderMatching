@@ -38,8 +38,10 @@ public class MatchOrderController {
 	public ModelAndView matchingSimple(HttpServletRequest request, Order order) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		List<Order> orders = null;
+		int count;
 		if (order.getSide().equals("buy")) {
-			orders = orderService.getAllAskOrders();
+			orders = orderService.getAskOrdersBySymbol(order.getSymbol());
+			count = 0;
 			for (Order o : orders) {
 				if (o.getPrice() <= order.getPrice()) {
 					if (o.getQty() == order.getQty()) {
@@ -58,7 +60,7 @@ public class MatchOrderController {
 				}
 			}
 		} else {
-			orders = orderService.getAllBidOrders();
+			orders = orderService.getBidOrdersBySymbol(order.getSymbol());
 			for (Order o : orders) {
 				if (o.getPrice() >= order.getPrice()) {
 					if (o.getQty() == order.getQty()) {
