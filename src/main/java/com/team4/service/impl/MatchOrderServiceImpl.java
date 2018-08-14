@@ -32,7 +32,7 @@ public class MatchOrderServiceImpl implements MatchOrderService {
 
 	public int getMatchOrderCount() {
 		int count = 0;
-		count = matchOrderMapper.getMachOrderCount();
+		count = matchOrderMapper.getMatchOrderCount();
 		return count;
 	}
 

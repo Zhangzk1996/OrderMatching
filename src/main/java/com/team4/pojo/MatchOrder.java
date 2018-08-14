@@ -4,7 +4,7 @@ public class MatchOrder {
 	private String matchID;
 	private String symbol;
 	private String bid_trader_name;
-	private String ask_trdaer_name;
+	private String ask_trader_name;
 	private double bid_price;
 	private double ask_price;
 	private int bid_size;
@@ -35,11 +35,11 @@ public class MatchOrder {
 	}
 
 	public String getAsk_trdaer_name() {
-		return ask_trdaer_name;
+		return ask_trader_name;
 	}
 
 	public void setAsk_trdaer_name(String ask_trdaer_name) {
-		this.ask_trdaer_name = ask_trdaer_name;
+		this.ask_trader_name = ask_trader_name;
 	}
 
 	public double getBid_price() {
@@ -90,7 +90,7 @@ public class MatchOrder {
 	@Override
 	public String toString() {
 		return "MatchOrder [matchID=" + matchID + ", symbol=" + symbol + ", bid_trader_id=" + bid_trader_name
-				+ ", ask_trdaer_id=" + ask_trdaer_name + ", bid_price=" + bid_price + ", ask_price=" + ask_price
+				+ ", ask_trader_id=" + ask_trader_name + ", bid_price=" + bid_price + ", ask_price=" + ask_price
 				+ ", bid_size=" + bid_size + ", ask_size=" + ask_size + "]";
 	}
 

@@ -6,7 +6,7 @@ public class Order {
 	private String traderName;
 	private String side;
 	private int Qty;
-	private float price;
+	private double price;
 	private String FOK;
 	private String condition;
 	private String status;
@@ -52,7 +52,7 @@ public class Order {
 		Qty = qty;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
@@ -92,8 +92,8 @@ public class Order {
 		this.otherPrice = otherPrice;
 	}
 
-	public Order(int orderId, String symbol, String traderName, String side, int qty, float price, String fOK,
-			String condition, String status) {
+	public Order(int orderId, String symbol, String traderName, String side, int qty, double price, String fOK,
+			String condition, String status,double otherPrice) {
 		super();
 		this.orderId = orderId;
 		this.symbol = symbol;
@@ -104,13 +104,14 @@ public class Order {
 		FOK = fOK;
 		this.condition = condition;
 		this.status = status;
+		this.otherPrice = otherPrice;
 	}
 
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", symbol=" + symbol + ", traderId=" + traderName + ", side=" + side
 				+ ", Qty=" + Qty + ", price=" + price + ", FOK=" + FOK + ", condition=" + condition + ", status="
-				+ status + "]";
+				+ status + ", otherPrice=" + otherPrice + "]";
 	}
 
 }

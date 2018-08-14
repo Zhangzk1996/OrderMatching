@@ -36,7 +36,7 @@
     from matchorders
   </select>
   
-  <select id="getMachOrderCount" resultType="java.lang.Integer">
+  <select id="getMatchOrderCount" resultType="java.lang.Integer"> 
     select 
   	count(*)
     from matchorders

@@ -27,7 +27,7 @@ public class OrderController {
 		String url = request.getHeader("Referer");
 		Trader trader = (Trader) request.getSession().getAttribute("cur_trader");
 		String symbol = (String) request.getSession().getAttribute("cur_symbol");
-		order.setTraderName(trader.getName());
+		order.setTraderName(trader.getTraderName());
 		order.setSymbol(symbol);
 		order.setStatus("alive");
 		

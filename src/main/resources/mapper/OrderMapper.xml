@@ -7,11 +7,11 @@
 		<result column="traderName" property="traderName" jdbcType="VARCHAR" />
 		<result column="side" property="side" jdbcType="VARCHAR" />
 		<result column="Qty" property="Qty" jdbcType="INTEGER"></result>
-		<result column="price" property="price" jdbcType="DECIMAL"></result>
+		<result column="price" property="price" jdbcType="DOUBLE"></result>
 		<result column="FOK" property="FOK" jdbcType="VARCHAR"></result>
 		<result column="condition" property="condition" jdbcType="VARCHAR"></result>
 		<result column="status" property="status" jdbcType="VARCHAR"></result>
-		<result column="otherPrice" property="otherPrice" jdbcType="DECIMAL"></result>
+		<result column="otherPrice" property="otherPrice" jdbcType="DOUBLE"></result>
 	</resultMap>
 
 	<sql id="Base_Order_List">

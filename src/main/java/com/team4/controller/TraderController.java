@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 import com.team4.pojo.Trader;
 import com.team4.service.TraderService;
 import com.team4.util.MD5;
@@ -34,8 +33,8 @@ public class TraderController {
 	 */
 	@RequestMapping(value = "/addTrader")
 	public ModelAndView addTrader(HttpServletRequest request, @ModelAttribute("trader") Trader trader1) throws Exception {
-//		String url = request.getHeader("Referer");
-		Trader trader = traderService.getTraderInfo(trader1.getName());
+		String url = request.getHeader("Referer");
+		Trader trader = traderService.getTraderInfo(trader1.getTraderName());
 		if (trader != null) {
 			// 对密码进行加密
 			String pass = MD5.md5(trader1.getPassword());
@@ -50,7 +49,7 @@ public class TraderController {
 	
 	@RequestMapping(value = "/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response,Trader trader, ModelMap modelMap) throws Exception {
-		Trader cur_trader = traderService.getTraderInfo(trader.getName());
+		Trader cur_trader = traderService.getTraderInfo(trader.getTraderName());
 		if (cur_trader != null) {
 			String pwd = MD5.md5(trader.getPassword());
 			if (pwd.equals(cur_trader.getPassword())) {

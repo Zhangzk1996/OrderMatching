@@ -12,6 +12,6 @@ public interface MatchOrderMapper {
 	
 	public List<MatchOrder> getAllMatchOrders();
 	
-	public int getMachOrderCount();
+	public int getMatchOrderCount();
 	
 }

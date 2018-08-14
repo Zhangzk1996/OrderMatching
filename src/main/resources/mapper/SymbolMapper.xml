@@ -14,7 +14,7 @@
     symbolName,company,lastSale,change_net,share_volume
   </sql>
   
-  <select id="getSymbolById" resultMap="SymbolMap" parameterType="java.lang.String" >
+  <select id="getSymbolById" resultMap="SymbolMap" parameterType="String" >
     select 
     <include refid="Base_Symbol_List" />
     from symbols
@@ -27,7 +27,7 @@
     from symbols
   </select>
   
-  <select id="getSymbolsByStr" resultMap="SymbolMap" parameterType="java.lang.String">
+  <select id="getSymbolsByStr" resultMap="SymbolMap" parameterType="String">
     select 
     <include refid="Base_Symbol_List" />
     from symbols
