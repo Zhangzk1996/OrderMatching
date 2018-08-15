@@ -77,10 +77,10 @@ function checkEmail(myEmail) {
     }
 }
 
-function checkName() {
-    if ($.trim($('#name').val()).length == 0) {
+function checkTraderName() {
+    if ($.trim($('#traderName').val()).length == 0) {
         $('#nameError').html('No name input');
-        $('#name').focus();
+        $('#traderName').focus();
         return false;
     }
     else {
@@ -100,6 +100,105 @@ function checkRegister() {
         return false;
     }
     if(checkName() == false) {
+        return false;
+    }
+}
+
+//mainPage order submit validate
+function checkSelectSymbol(symbol){
+    if(symbol == "-"){
+        $('#symbolError').html('select a symbol');
+        return false;
+    }
+    else{
+        $('#symbolError').html('');
+        return true;
+    }
+}
+function checkSelectSide(side){
+    if(side == "-") {
+        $("#sideError").html("select a side");
+        return false;
+    }
+    else{
+        $("#sideError").html(" ");
+        return true;
+    }
+}
+
+function checkQty(QTY) {
+    if(parseInt(QTY) <= 0 || QTY == "") {
+        $("#qtyError").html("input a qty");
+        return false;
+    }
+    $("#qtyError").html(" ");
+    return true;
+}
+
+function checkPrice(price) {
+    if(parseFloat(price) <= 0 || price == "") {
+        $("#priceError").html("input a price");
+        return false;
+    }
+    $("#priceError").html(" ");
+    return true;
+}
+
+function checkOtherPrice(otherPrice) {
+    if(parseFloat(otherPrice) <= 0 || otherPrice == "") {
+        $("#otherPriceError").html("input a price");
+        return false;
+    }
+    $("#otherPriceError").html(" ");
+    return true;
+}
+
+function checkFok(FOK) {
+    if(FOK == "-"){
+        $("#fokError").html("select a FOK");
+        return false;
+    }
+    $("#fokError").html(" ");
+    return true;
+}
+
+function checkCondition(condition) {
+    if(condition == "-") {
+        $("#conditionError").html("select a condition");
+        return false;
+    }
+    $("#conditionError").html(" ");
+    return true;
+}
+
+function checkOrderInformation(){
+    var symbol = $("#symbol").val();
+    var side = $("#side").val();
+    var FOK = $("#fok").val();
+    var price = $("#price").val();
+    var condition = $("#cond").val();
+    var QTY = $("#qty").val()
+    var otherPrice = $("#othePrice").val();
+    // console.log(symbol + side + FOK + price + condition + QTY);
+    if(checkSelectSymbol(symbol) == false) {
+        return false;
+    }
+    if(checkSelectSide(side) ==  false) {
+        return false;
+    }
+    if(checkQty(QTY) == false) {
+        return false;
+    }
+    if(checkPrice(price) == false) {
+        return false;
+    }
+    if(checkOtherPrice(otherPrice) == false) {
+    	return false;
+    }
+    if(checkFok(FOK) == false) {
+        return false;
+    }
+    if(checkCondition(condition) == false) {
         return false;
     }
 }

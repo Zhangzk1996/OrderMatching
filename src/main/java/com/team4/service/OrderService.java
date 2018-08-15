@@ -8,7 +8,7 @@ public interface OrderService {
 
 	public void addOrder(Order order);
 
-	public void deleteOrder(int orderId, String status);
+	public void deleteOrder(int orderId);
 
 	public Order getOrderById(int orderId);
 

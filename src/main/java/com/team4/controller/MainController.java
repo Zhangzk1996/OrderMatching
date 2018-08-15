@@ -70,6 +70,15 @@ public class MainController {
 		modelAndView.setViewName("/mainPage");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = "/mainPage1")
+	public ModelAndView mainPage1(HttpServletRequest request, @RequestParam("symbol") String symbol) throws Exception {
+//		ModelAndView modelAndView = new ModelAndView();
+		request.getSession().setAttribute("cur_symbol", symbol);
+//		modelAndView.setViewName("/mainPage");
+		System.out.println("go to main page!");
+		return new ModelAndView("redirect:mainPage");
+	}
 
 	@RequestMapping(value = "/allSymbols", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
@@ -105,66 +114,115 @@ public class MainController {
 		orderGrid.setTotal(total);
 		return orderGrid;
 	}
-	
-	@RequestMapping(value = "/leve1", produces = { "application/json;charset=UTF-8" })
+
+	@RequestMapping(value = "/firstLevel", produces = { "application/json;charset=UTF-8" })
 	@ResponseBody
-	public MatchOrderGrid leve1(HttpServletRequest request, @RequestParam("current") int current,
+	public MatchOrderGrid firstLevel(HttpServletRequest request, @RequestParam("current") int current,
 			@RequestParam("rowCount") int rowCount) throws Exception {
-//		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("44444444444444444444");
+		// ModelAndView modelAndView = new ModelAndView();
+		// System.out.println("44444444444444444444");
 		List<MatchOrder> leve1Orders = new ArrayList<MatchOrder>();
 		List<Symbol> symbols = symbolService.getAllSymbol();
-		System.out.println("555555555555555555555");
+		// System.out.println("555555555555555555555");
 		for (Symbol symbol : symbols) {
-			System.out.println("66666666666666666666");
+			// System.out.println("66666666666666666666");
 			List<Order> maxBid = orderService.getMaxBidOrdersBySymbol(symbol.getSymbol());
 			List<Order> minAsk = orderService.getMinAskOrdersBySymbol(symbol.getSymbol());
 			int i = 0;
 			for (i = 0; i < maxBid.size(); i++) {
-				System.out.println("777777777777777777777");
+				// System.out.println("777777777777777777777");
 				MatchOrder matchOrder = new MatchOrder();
 				Order bidOrder = maxBid.get(i);
 				matchOrder.setMatchID("" + bidOrder.getOrderId() + "_");
 				matchOrder.setBid_trader_name(bidOrder.getTraderName());
 				matchOrder.setBid_price(bidOrder.getPrice());
 				matchOrder.setBid_size(bidOrder.getQty());
-				Order askOrder = minAsk.get(i);
-				if (askOrder != null) {
-					matchOrder.setMatchID(matchOrder.getMatchID() + askOrder.getOrderId());
-					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
-					matchOrder.setAsk_price(askOrder.getPrice());
-					matchOrder.setAsk_size(askOrder.getQty());
+				matchOrder.setSymbol(bidOrder.getSymbol());
+				if (minAsk.size() > i) {
+					Order askOrder = minAsk.get(i);
+					if (askOrder != null) {
+						matchOrder.setMatchID(matchOrder.getMatchID() + askOrder.getOrderId());
+						matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
+						matchOrder.setAsk_price(askOrder.getPrice());
+						matchOrder.setAsk_size(askOrder.getQty());
+						matchOrder.setSymbol(askOrder.getSymbol());
+					}
 				}
 				leve1Orders.add(matchOrder);
 			}
 			if (i < minAsk.size()) {
-				for (int j = i ; j < minAsk.size(); j++) {
+				for (int j = i; j < minAsk.size(); j++) {
 					MatchOrder matchOrder = new MatchOrder();
 					Order askOrder = minAsk.get(i);
 					matchOrder.setMatchID("_" + askOrder.getOrderId());
 					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
 					matchOrder.setAsk_price(askOrder.getPrice());
 					matchOrder.setAsk_size(askOrder.getQty());
+					matchOrder.setSymbol(askOrder.getSymbol());
 					leve1Orders.add(matchOrder);
 				}
 			}
 		}
-//		modelAndView.setViewName("/mainPage");
-//		return modelAndView;
+		// modelAndView.setViewName("/mainPage");
+		// return modelAndView;
 		MatchOrderGrid matchOrderGrid = new MatchOrderGrid();
 		matchOrderGrid.setCurrent(current);
 		matchOrderGrid.setRowCount(rowCount);
 		matchOrderGrid.setRows(leve1Orders);
 		matchOrderGrid.setTotal(leve1Orders.size());
-		System.out.println("8888888888888888888888888");
+		// System.out.println("8888888888888888888888888");
 		return matchOrderGrid;
 	}
-	
-	@RequestMapping(value = "/leve2")
-	public ModelAndView leve2(HttpServletRequest request) throws Exception {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/mainPage");
-		return modelAndView;
+
+	@RequestMapping(value = "/secondLevel", produces = { "application/json;charset=UTF-8" })
+	@ResponseBody
+	public MatchOrderGrid secondLevel(HttpServletRequest request, @RequestParam("current") int current,
+			@RequestParam("rowCount") int rowCount) throws Exception {
+		List<MatchOrder> leve1Orders = new ArrayList<MatchOrder>();
+		List<Symbol> symbols = symbolService.getAllSymbol();
+		for (Symbol symbol : symbols) {
+			List<Order> maxBid = orderService.getMaxBidOrdersBySymbol(symbol.getSymbol());
+			List<Order> minAsk = orderService.getMinAskOrdersBySymbol(symbol.getSymbol());
+			int i = 0;
+			for (i = 0; i < maxBid.size(); i++) {
+				MatchOrder matchOrder = new MatchOrder();
+				Order bidOrder = maxBid.get(i);
+				matchOrder.setMatchID("" + bidOrder.getOrderId() + "_");
+				matchOrder.setBid_trader_name(bidOrder.getTraderName());
+				matchOrder.setBid_price(bidOrder.getPrice());
+				matchOrder.setBid_size(bidOrder.getQty());
+				matchOrder.setSymbol(bidOrder.getSymbol());
+				if (minAsk.size() > i) {
+					Order askOrder = minAsk.get(i);
+					if (askOrder != null) {
+						matchOrder.setMatchID(matchOrder.getMatchID() + askOrder.getOrderId());
+						matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
+						matchOrder.setAsk_price(askOrder.getPrice());
+						matchOrder.setAsk_size(askOrder.getQty());
+						matchOrder.setSymbol(askOrder.getSymbol());
+					}
+				}
+				leve1Orders.add(matchOrder);
+			}
+			if (i < minAsk.size()) {
+				for (int j = i; j < minAsk.size(); j++) {
+					MatchOrder matchOrder = new MatchOrder();
+					Order askOrder = minAsk.get(i);
+					matchOrder.setMatchID("_" + askOrder.getOrderId());
+					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
+					matchOrder.setAsk_price(askOrder.getPrice());
+					matchOrder.setAsk_size(askOrder.getQty());
+					matchOrder.setSymbol(askOrder.getSymbol());
+					leve1Orders.add(matchOrder);
+				}
+			}
+		}
+		MatchOrderGrid matchOrderGrid = new MatchOrderGrid();
+		matchOrderGrid.setCurrent(current);
+		matchOrderGrid.setRowCount(rowCount);
+		matchOrderGrid.setRows(leve1Orders);
+		matchOrderGrid.setTotal(leve1Orders.size());
+		return matchOrderGrid;
 	}
 
 }

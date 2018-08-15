@@ -85,7 +85,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where traderName = #{traderName,jdbcType=VARCHAR} and side = "buy"
+		where traderName = #{traderName,jdbcType=VARCHAR} and side = "buy" and sta = "alive"
 		order by price
 	</select>
 	
@@ -93,7 +93,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where traderName = #{traderName,jdbcType=VARCHAR} and side = "sell"
+		where traderName = #{traderName,jdbcType=VARCHAR} and side = "sell" and sta = "alive"
 		order by price asc
 	</select>
 
@@ -104,7 +104,7 @@
 	</select>
 
 	<delete id="deleteOrder" parameterType="java.lang.Integer">
-		update orders set sta = #{sta,jdbcType=VARCHAR} where orderId =
+		update orders set sta = "deleted" where orderId =
 		#{orderId,jdbcType=INTEGER}
 	</delete>
 </mapper>

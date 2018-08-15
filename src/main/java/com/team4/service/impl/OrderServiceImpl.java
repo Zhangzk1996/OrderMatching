@@ -20,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
 		orderMapper.addOrder(order);
 	}
 
-	public void deleteOrder(int orderId, String status) {
-		orderMapper.deleteOrder(orderId, status);
+	public void deleteOrder(int orderId) {
+		orderMapper.deleteOrder(orderId);
 	}
 
 	public Order getOrderById(int orderId) {

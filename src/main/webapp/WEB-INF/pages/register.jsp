@@ -53,7 +53,7 @@
             <div class="form-group" style="padding-bottom: 20px;">
                 <div class="col-md-6" style="width: 30px;">Name:</div>                       
                 <div class="col-md-6" style="margin-left: 76px;">
-                    <input class="form-control" id="traderName" name="traderName" onblur="checkName()" required="true" type="text"/>
+                    <input class="form-control" id="traderName" name="traderName" onblur="checkTraderName()" required="true" type="text"/>
                 </div>
                 <div class="col-md-12">
                 <p id="nameError" style="margin-bottom: -2px;color: red;margin-left: 110px;">

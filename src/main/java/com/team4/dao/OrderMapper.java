@@ -10,7 +10,7 @@ public interface OrderMapper {
 
 	public void addOrder(Order order);
 
-	public void deleteOrder(int orderId, @Param("status")String status);
+	public void deleteOrder(int orderId);
 
 	public Order getOrderById(int orderId);
 

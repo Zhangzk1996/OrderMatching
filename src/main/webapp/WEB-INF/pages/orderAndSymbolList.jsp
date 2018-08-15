@@ -129,7 +129,7 @@
             formatters: {
                 "commands": function(column, row)
                 {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\">Delete<span class=\"fa fa-trash-o\"></span></button>";
+                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.orderId + "\">Delete<span class=\"fa fa-trash-o\"></span></button>";
                 }
             }
         }).on("loaded.rs.jquery.bootgrid", function()
@@ -137,7 +137,7 @@
             grid.find(".command-delete").on("click", function(e)
             {
               		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath %>order/deleteOrder",{userId:$(this).data("row-id")},function(){
+             		$.post("<%=basePath %>order/deleteOrder",{orderId:$(this).data("row-id")},function(){
                     	alert("Delete Done");
                     	$("#grid-data").bootgrid("reload");
                 }); 
@@ -155,20 +155,19 @@
                 };
             },
             url:"<%=basePath %>main/allSymbols",
-			// <%=basePath %>symbol/symbolList
             formatters: {
                 "commands": function(column, row)
                 {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\">Delete<span class=\"fa fa-trash-o\"></span></button>";
+                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.symbol + "\">OK<span class=\"fa fa-trash-o\"></span></button>";
                 }
             }
         }).on("loaded.rs.jquery.bootgrid", function()
 		{
             grid.find(".command-delete").on("click", function(e)
             {
-              		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath %>order/addOrder",{symbol:$(this).data("row-id")},function(){
-                    	// alert("Delete Done");
+              		// alert("You pressed delete on row: " + $(this).data("row-id"));
+             		$.post("<%=basePath %>main/login",{symbol:$(this).data("row-id")},function(){
+                    	alert("go!!");
                     	// $("#grid-data").bootgrid("reload");
                 }); 
             });

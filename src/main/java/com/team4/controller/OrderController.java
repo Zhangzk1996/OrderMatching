@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.pojo.Order;
@@ -40,12 +41,10 @@ public class OrderController {
 	}
 	
 	@RequestMapping(value = "/deleteOrder")
-	public ModelAndView deleteOrder(HttpServletRequest request) throws Exception {
+	public ModelAndView deleteOrder(HttpServletRequest request, @RequestParam("orderId")Integer orderId) throws Exception {
 		String url=request.getHeader("Referer");
-		Order cur_order = (Order) request.getSession().getAttribute("cur_order");
-		cur_order.setSta("deleted");
-		orderService.deleteOrder(cur_order.getOrderId(), cur_order.getSta());
-		request.getSession().setAttribute("cur_order", cur_order);
+		System.out.println(url);
+		orderService.deleteOrder(orderId);
 		return new ModelAndView("redirect:"+url);
 	}
 	

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team4.pojo.Symbol;
 import com.team4.pojo.Trader;
+import com.team4.service.SymbolService;
 import com.team4.service.TraderService;
 import com.team4.util.MD5;
 
@@ -23,6 +25,9 @@ public class TraderController {
 	
 	@Autowired
 	private TraderService traderService;
+	
+	@Autowired
+	private SymbolService symbolService;
 	
 	/**
 	 * register
@@ -51,17 +56,20 @@ public class TraderController {
 	public ModelAndView loginValid(HttpServletRequest request, HttpServletResponse response, Trader trader, ModelMap modelMap) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		Trader cur_trader = traderService.getTraderInfo(trader.getEmail());
+		List<Symbol> symbols = symbolService.getAllSymbol();
+		request.getSession().setAttribute("symbolData", symbols);
 		if (cur_trader != null) {
 			String pwd = MD5.md5(trader.getPassword());
 			if (pwd.equals(cur_trader.getPassword())) {
 				request.getSession().setAttribute("cur_trader", cur_trader);
 				modelAndView.setViewName("/mainPage");
-				System.out.println("1111111111111");
+//				System.out.println("1111111111111");
 			} else {
+				modelAndView.addObject("passError", "Error password or username!");
 				modelAndView.setViewName("/login");
-				System.out.println("22222222");
+//				System.out.println("22222222");
 			}
-			System.out.println("333333333");
+//			System.out.println("333333333");
 		}
 		return modelAndView;
 	}
