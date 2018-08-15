@@ -75,4 +75,12 @@ public class OrderServiceImpl implements OrderService {
 		return orders;
 	}
 
+	public void closeMatchedOrder(int orderId) {
+		orderMapper.closeMatchedOrder(orderId);
+	}
+
+	public void updateOrder(Order order) {
+		orderMapper.updateOrder(order);
+	}
+
 }

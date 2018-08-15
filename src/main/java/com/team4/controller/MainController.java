@@ -70,12 +70,12 @@ public class MainController {
 		modelAndView.setViewName("/mainPage");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/mainPage1")
 	public ModelAndView mainPage1(HttpServletRequest request, @RequestParam("symbol") String symbol) throws Exception {
-//		ModelAndView modelAndView = new ModelAndView();
+		// ModelAndView modelAndView = new ModelAndView();
 		request.getSession().setAttribute("cur_symbol", symbol);
-//		modelAndView.setViewName("/mainPage");
+		// modelAndView.setViewName("/mainPage");
 		System.out.println("go to main page!");
 		return new ModelAndView("redirect:mainPage");
 	}
@@ -147,6 +147,8 @@ public class MainController {
 						matchOrder.setAsk_size(askOrder.getQty());
 						matchOrder.setSymbol(askOrder.getSymbol());
 					}
+				} else {
+					matchOrder.setMatchID(matchOrder.getMatchID() + "0");
 				}
 				leve1Orders.add(matchOrder);
 			}
@@ -154,7 +156,7 @@ public class MainController {
 				for (int j = i; j < minAsk.size(); j++) {
 					MatchOrder matchOrder = new MatchOrder();
 					Order askOrder = minAsk.get(i);
-					matchOrder.setMatchID("_" + askOrder.getOrderId());
+					matchOrder.setMatchID("0_" + askOrder.getOrderId());
 					matchOrder.setAsk_trdaer_name(askOrder.getTraderName());
 					matchOrder.setAsk_price(askOrder.getPrice());
 					matchOrder.setAsk_size(askOrder.getQty());
@@ -201,6 +203,8 @@ public class MainController {
 						matchOrder.setAsk_size(askOrder.getQty());
 						matchOrder.setSymbol(askOrder.getSymbol());
 					}
+				} else {
+					matchOrder.setMatchID(matchOrder.getMatchID() + "0");
 				}
 				leve1Orders.add(matchOrder);
 			}

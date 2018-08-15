@@ -107,4 +107,24 @@
 		update orders set sta = "deleted" where orderId =
 		#{orderId,jdbcType=INTEGER}
 	</delete>
+	
+	<update id="closeMatchedOrder" parameterType="java.lang.Integer">
+		update orders set sta = "matched"
+		where orderId = #{orderId,jdbcType=INTEGER}
+	</update>
+	
+	<update id="updateOrder" parameterType="com.team4.pojo.Order">
+		update orders 
+		set symbol = #{symbol,jdbcType=VARCHAR},
+		set traderName = #{traderName,jdbcType=VARCHAR},
+		set side = #{side,jdbcType=VARCHAR},
+		set Qty = #{qty,jdbcType=INTEGER},
+		set price = #{price,jdbcType=DECIMAL},
+		set FOK = #{fok,jdbcType=VARCHAR},
+		set cond = #{cond,jdbcType=VARCHAR},
+		set sta = #{sta,jdbcType=VARCHAR},
+		set otherPrice = #{otherPrice,jdbcType=DECIMAL}
+		where orderId = #{orderId,jdbcType=INTEGER}
+	</update>
+	
 </mapper>

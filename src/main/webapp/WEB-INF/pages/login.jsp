@@ -81,12 +81,12 @@
                        Register
                     </a>
                 </div>
-                <c:if test="${!empty passError}">
-                <div class="col-md-12 btn btn-warning btn-md" style="left: 0px; margin-bottom: 10px;">
+            </div>
+             <c:if test="${!empty passError}">
+                <div class="col-md-12 btn btn-warning btn-md" style="left: 0px; margin-bottom: 10px; margin-top:20px;">
                     ${passError}
                </div>
             	</c:if>
-            </div>
         </form:form>
     <!-- </div> -->
 </div>

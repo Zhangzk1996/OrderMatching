@@ -11,6 +11,10 @@ public interface OrderService {
 	public void deleteOrder(int orderId);
 
 	public Order getOrderById(int orderId);
+	
+	public void closeMatchedOrder(int orderId);
+	
+	public void updateOrder(Order order);
 
 	public List<Order> getAllBidOrders();
 

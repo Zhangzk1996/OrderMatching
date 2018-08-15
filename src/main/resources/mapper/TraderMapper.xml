@@ -27,7 +27,7 @@
     select 
     <include refid="Base_Trader_List" />
     from traders
-    where email = #{email,jdbcType=VARCHAR}
+    where email = #{email,jdbcType=VARCHAR} or traderName = #{traderName,jdbcType=VARCHAR}
   </select>
  
  <select id="getAllTraders" resultMap="TraderMap" >

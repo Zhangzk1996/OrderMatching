@@ -206,7 +206,7 @@
 										} readOnly=true>
 								</div>
 								<div class="col-md-12">
-                                	<p id="symbolError" style="margin-bottom: 6px;color: red;">
+                                	<p id="Error" style="margin-bottom: 6px;color: red;">
                                	    </p>
                           		</div>
 							</div>

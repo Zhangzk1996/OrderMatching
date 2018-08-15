@@ -13,6 +13,8 @@ public interface OrderMapper {
 	public void deleteOrder(int orderId);
 
 	public Order getOrderById(int orderId);
+	
+	public void updateOrder(Order order);
 
 	public List<Order> getAllBidOrders(@Param("side")String side);
 
@@ -29,6 +31,8 @@ public interface OrderMapper {
 	public List<Order> getMaxBidOrdersBySymbol(@Param("symbol")String symbol);
 
 	public List<Order> getMinAskOrdersBySymbol(@Param("symbol")String symbol);
+	
+	public void closeMatchedOrder(int orderId);
 
 	public int getOrderCount();
 

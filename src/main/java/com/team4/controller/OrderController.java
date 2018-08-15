@@ -28,14 +28,18 @@ public class OrderController {
 	@RequestMapping(value = "/addOrder")
 	public ModelAndView addOrder(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, Order order) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
-		Trader trader = (Trader) request.getSession().getAttribute("cur_trader");
-		// String symbol = (String) request.getSession().getAttribute("cur_symbol");
-		order.setTraderName(trader.getTraderName());
-		// order.setSymbol(symbol);
-		order.setSta("alive");
 		
+		Trader trader = (Trader) request.getSession().getAttribute("cur_trader");
+		order.setTraderName(trader.getTraderName());
+		order.setSta("alive");
 		orderService.addOrder(order);
-//		System.out.println("44444444444444" + order);
+		
+//		if (order.getCond().equals("Limit Order")) {
+//			matchingMarket(request, order); // return new ModelAndView("redirect:/main/simpleOrder");
+//		} else if (order.getCond().equals("Market Order")) {
+//			matchingSimple(request, order); // return new ModelAndView("redirect:/main/marketOrder");
+//		}
+		
 		modelAndView.setViewName("/mainPage");
 		return modelAndView;
 	}
