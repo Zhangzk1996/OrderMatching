@@ -68,22 +68,18 @@ public class TraderController {
 			ModelMap modelMap) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		Trader cur_trader = traderService.getTraderInfo(trader.getEmail());
-//		System.out.println("cur_trader: " + cur_trader);
 		List<Symbol> symbols = symbolService.getAllSymbol();
 		request.getSession().setAttribute("symbolData", symbols);
 		if (cur_trader != null) {
 			String pwd = MD5.md5(trader.getPassword());
 			if (pwd.equals(cur_trader.getPassword())) {
 				request.getSession().setAttribute("cur_trader", cur_trader);
-//				modelAndView.setViewName("/mainPage");
+				System.out.println("redirect:/main/mainPage");
 				return new ModelAndView("redirect:/main/mainPage");
-				// System.out.println("1111111111111");
 			} else {
 				modelAndView.addObject("passError", "Error password or username!");
 				modelAndView.setViewName("/login");
-				// System.out.println("22222222");
 			}
-			// System.out.println("333333333");
 		}
 		return modelAndView;
 	}

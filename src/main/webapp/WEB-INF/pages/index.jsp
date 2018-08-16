@@ -15,28 +15,5 @@
     <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=main/login"> 
 </head>
 <body>
-<h1>Hello World!</h1>
-<!-- <a href="<%=basePath %>symbols/allSymbols">page</a>
-<div class="waterfoo stark-components row">
-        <div class="item-wrapper normal">
-            <c:forEach var="item" items="${allSymbol}">
-                <div class="card col">
-                    <a href="<%=basePath%>goods/goodsId/${item.symbol}">
-                        <div class="card-image">
-                            <img src="../upload/${item.share_volume}" />
-                        </div>
-                        <div class="card-content item-price"><c:out value="${item.symbol}"></c:out></div>
-                        <div class="card-content item-name">
-                            <p><c:out value="${item.company}"></c:out></p>
-                        </div>
-                        <div class="card-content item-location">
-                            <p>CITI</p>
-                            <p><c:out value="${item.change_net}"></c:out></p>
-                        </div>
-                    </a>
-                </div>
-            </c:forEach>
-        </div>
-    </div> -->
 </body>
 </html>

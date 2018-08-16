@@ -22,6 +22,7 @@
 	System.out.println(basePath);
 	System.out.print("11111111111" + request.getSession().getAttribute("cur_trader"));
 	System.out.print("11111111111" + request.getSession().getAttribute("cur_symbol"));
+	String cur_symbol = (String)request.getSession().getAttribute("cur_symbol");
 %>
 <!DOCTYPE html>
 <html>
@@ -82,6 +83,18 @@
             }
         
         }
+        
+        function informationConfirm(){
+       	 var symbol = $("#symbol").val();
+            var side = $("#side").val();
+            var Qty = $("#qty").val();
+            var price = $("#price").val();
+            var otherPrice = $("#otherPrice").val();
+            var FOK = $("#fok").val();
+            var condition = $("#cond").val();
+            var txt = "symbol:"+symbol+"\n"+"side:"+side+"\n"+"Qty:"+Qty+"\n"+"price:"+price+"\n"+"otherPrice:"+otherPrice+"\n"+"FOK:"+FOK+"\n"+"condition:"+condition;
+       	alert(txt);
+       }
     </script>
 <script>
             var mydata = new Array();
@@ -323,7 +336,7 @@
 							</div>
 							<div class="cell-xs-12 offset-top-37">
 								<button type="submit" data-text="search"
-									class="btn btn-sm btn-primary">
+									class="btn btn-sm btn-primary" onclick="informationConfirm()">
 									<span>Add</span>
 								</button>
 							</div>
@@ -359,6 +372,7 @@
 							<th data-column-id="bid_size">BidSize</th>
 							<th data-column-id="ask_price">Ask</th>
 							<th data-column-id="ask_size">AskSize</th>
+							<th data-column-id="commands" data-formatter="commands" data-sortable="false">Commands</th>
 						</tr>
 					</thead>
 				</table>
@@ -391,10 +405,28 @@
             post: function ()
             {
                 return {
+                	current: 1,
+                	rowCount: 10,
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"<%=basePath%>main/firstLevel"
+            url:"<%=basePath%>main/firstLevel",
+            formatters: {
+                "commands": function(column, row)
+                {
+                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.symbol + "\">Detail<span class=\"fa fa-trash-o\"></span></button>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function()
+		{
+            grid.find(".command-delete").on("click", function(e)
+            {
+         		$.post("<%=basePath %>main/mainPage1",{symbol:$(this).data("row-id")},function(){
+         			// alert("To level2?");
+            	}); 
+         		$("#grid-data4").bootgrid("reload");
+         		showLevel2();
+            });
         });
     });
 

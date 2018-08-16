@@ -125,7 +125,6 @@
                 };
             },
             url:"<%=basePath %>main/allOrders",
-			// <%=basePath %>order/orderList
             formatters: {
                 "commands": function(column, row)
                 {
@@ -165,10 +164,8 @@
 		{
             grid.find(".command-delete").on("click", function(e)
             {
-              		// alert("You pressed delete on row: " + $(this).data("row-id"));
              		$.post("<%=basePath %>main/mainPage1",{symbol:$(this).data("row-id")},function(){
-                    	alert("go!!");
-                    	// $("#grid-data").bootgrid("reload");
+                    	alert("Go to submit an order?");
                     	window.location.href = "<%=basePath %>main/mainPage";
                 }); 
             });
