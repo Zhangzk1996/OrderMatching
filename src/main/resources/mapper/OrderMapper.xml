@@ -85,7 +85,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where traderName = #{traderName,jdbcType=VARCHAR} and side = "buy" and sta = "alive"
+		where traderName = #{traderName,jdbcType=VARCHAR} and side = "buy"
 		order by price
 	</select>
 	
@@ -93,7 +93,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where traderName = #{traderName,jdbcType=VARCHAR} and side = "sell" and sta = "alive"
+		where traderName = #{traderName,jdbcType=VARCHAR} and side = "sell"
 		order by price asc
 	</select>
 

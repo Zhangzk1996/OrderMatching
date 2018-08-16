@@ -11,18 +11,22 @@
 	int symbolSize = symbolData.size();
 	String[] symbolName = new String[symbolSize];
 	Double[] symbolPrice = new Double[symbolSize];
+	double cur_price = 0;
+	String cur_symbol = (String)request.getSession().getAttribute("cur_symbol");
 	int i = 0;
 	for (Symbol symbol : symbolData) {
 		symbolName[i] = symbol.getSymbol();
 		symbolPrice[i] = symbol.getLast_sale();
+		if (cur_symbol.equals(symbol.getSymbol())) {
+			cur_price = symbol.getLast_sale();
+		}
 		i++;
 		// System.out.println("name: " + symbolName[i] + ", price: " + symbolPrice[i]);
 	}
 	// request.getSession().getAttribute("cur_trader");
 	System.out.println(basePath);
-	System.out.print("11111111111" + request.getSession().getAttribute("cur_trader"));
-	System.out.print("11111111111" + request.getSession().getAttribute("cur_symbol"));
-	String cur_symbol = (String)request.getSession().getAttribute("cur_symbol");
+	System.out.println(request.getSession().getAttribute("cur_trader"));
+	System.out.println(request.getSession().getAttribute("cur_symbol"));
 %>
 <!DOCTYPE html>
 <html>
@@ -85,7 +89,7 @@
         }
         
         function informationConfirm(){
-       	 var symbol = $("#symbol").val();
+       	 	var symbol = $("#symbol").val();
             var side = $("#side").val();
             var Qty = $("#qty").val();
             var price = $("#price").val();
@@ -93,8 +97,23 @@
             var FOK = $("#fok").val();
             var condition = $("#cond").val();
             var txt = "symbol:"+symbol+"\n"+"side:"+side+"\n"+"Qty:"+Qty+"\n"+"price:"+price+"\n"+"otherPrice:"+otherPrice+"\n"+"FOK:"+FOK+"\n"+"condition:"+condition;
-       	alert(txt);
+       		alert(txt);
        }
+        function checkSelectSymbol(symbol){
+        	<%for (int p = 0; p < symbolSize; p++) { %>
+        		if("<%=symbolData.get(p).getSymbol()%>"==symbol || "<%=symbolData.get(p).getSymbol()%>" == "<%=cur_symbol%>") {
+        			$('#currenPrice').html("<%=symbolData.get(p).getSymbol()%> : <%=symbolData.get(p).getLast_sale()%>");
+        		}
+        	<%}%>
+            if(symbol == "-"){
+                $('#symbolError').html('select a symbol');
+                return false;
+            }
+            else{
+                $('#symbolError').html('');
+                return true;
+            }
+        }
     </script>
 <script>
             var mydata = new Array();
@@ -350,6 +369,10 @@
 		<div
 			style="width: 66%; float: left; margin-top: 20px; margin-left: 20px;"
 			id="canvasChart">
+			<div class="currentPrice" id="currenPrice" readonly=true 
+            style="border:1px solid lightgrey; border-radius: 5px; width: 120px; margin-left: 80%; text-align = center">
+                <%=cur_symbol %>:<%=cur_price %>
+            </div>
 			<canvas id="canvas" width="100" height="50px"></canvas>
 			<div style="width: 100%; border: 1px gray solid; float: left"></div>
 			<div

@@ -104,17 +104,6 @@ function checkRegister() {
     }
 }
 
-//mainPage order submit validate
-function checkSelectSymbol(symbol){
-    if(symbol == "-"){
-        $('#symbolError').html('select a symbol');
-        return false;
-    }
-    else{
-        $('#symbolError').html('');
-        return true;
-    }
-}
 function checkSelectSide(side){
     if(side == "-") {
         $("#sideError").html("select a side");
