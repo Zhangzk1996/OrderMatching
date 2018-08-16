@@ -50,8 +50,14 @@ public class TraderController {
 			String pass = MD5.md5(trader.getPassword());
 			trader.setPassword(pass);
 			traderService.addTrader(trader);
-		} else {
+		}
+		else if(trader2 != null){
+			request.getSession().setAttribute("emailRegisted", "Email has been registed");
+			return new ModelAndView("redirect:/main/register");
+		} 
+		else {
 			System.out.println("The trader name has been used! Please change nama to try again!");
+			request.getSession().setAttribute("emailRegisted", "Name has been registed");
 			return new ModelAndView("redirect:/main/register");
 		}
 		return new ModelAndView("redirect:/main/login");

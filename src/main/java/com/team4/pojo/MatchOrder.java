@@ -38,7 +38,7 @@ public class MatchOrder {
 		return ask_trader_name;
 	}
 
-	public void setAsk_trdaer_name(String ask_trdaer_name) {
+	public void setAsk_trdaer_name(String ask_trader_name) {
 		this.ask_trader_name = ask_trader_name;
 	}
 

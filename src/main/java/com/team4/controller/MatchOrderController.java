@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.pojo.MatchOrder;
@@ -47,8 +49,8 @@ public class MatchOrderController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = "/simpleOrder")
-	public ModelAndView matchingSimple(HttpServletRequest request, Order order) throws Exception {
+	@RequestMapping(value = "/limitOrder")
+	public ModelAndView limitSimple(HttpServletRequest request, Order order) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		List<Order> orders = new ArrayList<Order>();
 		int count = order.getQty();
@@ -107,11 +109,13 @@ public class MatchOrderController {
 			}
 		}
 		modelAndView = matchSuccessOperation(request, order, count, orders);
+		modelAndView.setViewName("redirect:/main/mainPage");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/marketOrder")
 	public ModelAndView matchingMarket(HttpServletRequest request, Order order) throws Exception {
+		System.out.println("=====================================marketOrder1============================");
 		ModelAndView modelAndView = new ModelAndView();
 		int count = order.getQty();
 		List<Order> matchOrders = new ArrayList<Order>();
@@ -138,13 +142,8 @@ public class MatchOrderController {
 			}
 		}
 		modelAndView = matchSuccessOperation(request, order, count, matchOrders);
-		return modelAndView;
-	}
-
-	@RequestMapping(value = "/limitOrder")
-	public ModelAndView matchingLimit(HttpServletRequest request) throws Exception {
-		ModelAndView modelAndView = new ModelAndView();
-
+		System.out.println("=====================================marketOrder2============================");
+		modelAndView.setViewName("/main/mainPage");
 		return modelAndView;
 	}
 

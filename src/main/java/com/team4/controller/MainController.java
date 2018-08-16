@@ -77,7 +77,7 @@ public class MainController {
 		request.getSession().setAttribute("cur_symbol", symbol);
 		// modelAndView.setViewName("/mainPage");
 		System.out.println("go to main page!");
-		return new ModelAndView("redirect:mainPage");
+		return new ModelAndView("redirect:/main/mainPage");
 	}
 
 	@RequestMapping(value = "/allSymbols", produces = { "application/json;charset=UTF-8" })

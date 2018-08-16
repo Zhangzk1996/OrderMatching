@@ -16,13 +16,13 @@ public interface OrderMapper {
 	
 	public void updateOrder(Order order);
 
-	public List<Order> getAllBidOrders(@Param("side")String side);
+	public List<Order> getAllBidOrders();
 
-	public List<Order> getAllAskOrders(@Param("side")String side);
+	public List<Order> getAllAskOrders();
 
-	public List<Order> getBidOrdersBySymbol(@Param("symbol")String symbol, String side);
+	public List<Order> getBidOrdersBySymbol(@Param("symbol")String symbol);
 
-	public List<Order> getAskOrdersBySymbol(@Param("symbol")String symbol, String side);
+	public List<Order> getAskOrdersBySymbol(@Param("symbol")String symbol);
 	
 	public List<Order> getBidOrdersByTrader(@Param("traderName")String traderName);
 
@@ -31,6 +31,8 @@ public interface OrderMapper {
 	public List<Order> getMaxBidOrdersBySymbol(@Param("symbol")String symbol);
 
 	public List<Order> getMinAskOrdersBySymbol(@Param("symbol")String symbol);
+	
+	public int currentOrderId();
 	
 	public void closeMatchedOrder(int orderId);
 

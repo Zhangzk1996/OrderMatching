@@ -166,9 +166,10 @@
             grid.find(".command-delete").on("click", function(e)
             {
               		// alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath %>main/login",{symbol:$(this).data("row-id")},function(){
+             		$.post("<%=basePath %>main/mainPage1",{symbol:$(this).data("row-id")},function(){
                     	alert("go!!");
                     	// $("#grid-data").bootgrid("reload");
+                    	window.location.href = "<%=basePath %>main/mainPage";
                 }); 
             });
         });

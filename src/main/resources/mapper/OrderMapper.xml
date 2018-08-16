@@ -38,14 +38,14 @@
 	<select id="getAllBidOrders" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
-		from orders where side = #{side,jdbcType=VARCHAR}
+		from orders where side = "buy"
 		order by price desc
 	</select>
 
 	<select id="getAllAskOrders" resultMap="OrderMap" parameterType="String">
 		select
 		<include refid="Base_Order_List" />
-		from orders where side = #{side,jdbcType=VARCHAR}
+		from orders where side = "sell"
 		order by price asc
 	</select>
 
@@ -53,7 +53,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where symbol = #{symbol,jdbcType=VARCHAR} and side = #{side,jdbcType=VARCHAR}
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = "buy" and sta = "alive"
 		order by price desc
 	</select>
 
@@ -61,7 +61,7 @@
 		select
 		<include refid="Base_Order_List" />
 		from orders
-		where symbol = #{symbol,jdbcType=VARCHAR} and side = #{side,jdbcType=VARCHAR}
+		where symbol = #{symbol,jdbcType=VARCHAR} and side = "sell" and sta = "alive"
 		order by price asc
 	</select>
 	
@@ -116,15 +116,20 @@
 	<update id="updateOrder" parameterType="com.team4.pojo.Order">
 		update orders 
 		set symbol = #{symbol,jdbcType=VARCHAR},
-		set traderName = #{traderName,jdbcType=VARCHAR},
-		set side = #{side,jdbcType=VARCHAR},
-		set Qty = #{qty,jdbcType=INTEGER},
-		set price = #{price,jdbcType=DECIMAL},
-		set FOK = #{fok,jdbcType=VARCHAR},
-		set cond = #{cond,jdbcType=VARCHAR},
-		set sta = #{sta,jdbcType=VARCHAR},
-		set otherPrice = #{otherPrice,jdbcType=DECIMAL}
+			traderName = #{traderName,jdbcType=VARCHAR},
+			side = #{side,jdbcType=VARCHAR},
+			Qty = #{qty,jdbcType=INTEGER},
+			price = #{price,jdbcType=DECIMAL},
+			FOK = #{fok,jdbcType=VARCHAR},
+			cond = #{cond,jdbcType=VARCHAR},
+			sta = #{sta,jdbcType=VARCHAR},
+			otherPrice = #{otherPrice,jdbcType=DECIMAL}
 		where orderId = #{orderId,jdbcType=INTEGER}
 	</update>
+	
+	<select id="currentOrderId" resultType="java.lang.Integer">
+		select max(orderId)
+		from orders
+	</select>
 	
 </mapper>

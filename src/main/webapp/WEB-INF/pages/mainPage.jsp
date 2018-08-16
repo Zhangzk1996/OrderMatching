@@ -21,6 +21,7 @@
 	// request.getSession().getAttribute("cur_trader");
 	System.out.println(basePath);
 	System.out.print("11111111111" + request.getSession().getAttribute("cur_trader"));
+	System.out.print("11111111111" + request.getSession().getAttribute("cur_symbol"));
 %>
 <!DOCTYPE html>
 <html>
@@ -213,10 +214,11 @@
 							<div class="cell-sm-6">
 								<div class="form-group" style="margin-bottom: 4px;">
 									<label for="symbol" class="form-label">symbol</label> <select
-										id="symbol" name="symbol" data-placeholder="symbol" value=${cur_symbol}
+										id="symbol" name="symbol" data-placeholder="symbol" 
 										data-minimum-results-for-search="Infinity"
 										class="form-control select-filter" onblur="checkSelectSymbol(this.value)">
 										<option>-</option>
+										<option selected = true>${cur_symbol}</option>
 										<option>AABA</option>
 										<option>AAPL</option>
 										<option>AMD</option>
@@ -357,8 +359,6 @@
 							<th data-column-id="bid_size">BidSize</th>
 							<th data-column-id="ask_price">Ask</th>
 							<th data-column-id="ask_size">AskSize</th>
-							<th data-column-id="commands" data-formatter="commands"
-								data-sortable="false">Commands</th>
 						</tr>
 					</thead>
 				</table>
@@ -376,8 +376,6 @@
 							<th data-column-id="bid_size">BidSize</th>
 							<th data-column-id="ask_price">Ask</th>
 							<th data-column-id="ask_size">AskSize</th>
-							<th data-column-id="commands" data-formatter="commands"
-								data-sortable="false">Commands</th>
 						</tr>
 					</thead>
 				</table>
@@ -396,23 +394,7 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"<%=basePath%>main/firstLevel",
-            formatters: {
-                "commands": function(column, row)
-                {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\">Delete<span class=\"fa fa-trash-o\"></span></button>";
-                }
-            }
-        }).on("loaded.rs.jquery.bootgrid", function()
-		{
-            grid.find(".command-delete").on("click", function(e)
-            {
-              		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath%>order/deleteOrder",{matchID:$(this).data("row-id")},function(){
-                    	alert("Delete Done");
-                    	$("#grid-data3").bootgrid("reload");
-                }); 
-            });
+            url:"<%=basePath%>main/firstLevel"
         });
     });
 
@@ -425,25 +407,9 @@
                     id: "b0df282a-0d67-40e5-8558-c9e93b7befed"
                 };
             },
-            url:"<%=basePath%>main/secondLevel",
-            formatters: {
-                "commands": function(column, row)
-                {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\">Delete<span class=\"fa fa-trash-o\"></span></button>";
-                }
-            }
-        }).on("loaded.rs.jquery.bootgrid", function()
-		{
-            grid.find(".command-delete").on("click", function(e)
-            {
-              		alert("You pressed delete on row: " + $(this).data("row-id"));
-             		$.post("<%=basePath%>order/deleteOrder",{matchID : $(this).data("row-id")},function() {
-						alert("Delete Done");
-						$("#grid-data4").bootgrid("reload");
-					});
-				});
-			});
-		});
+            url:"<%=basePath%>main/secondLevel"
+        });
+	});
 	</script>
 </body>
 </html>
