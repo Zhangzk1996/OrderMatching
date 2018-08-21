@@ -5,7 +5,7 @@
     <id column="symbolName" property="symbol" jdbcType="VARCHAR" />
     <result column="company" property="company" jdbcType="VARCHAR" />
     <result column="lastSale" property="last_sale" jdbcType="DOUBLE" />
-    <result column="change_net" property="change_net" jdbcType="FLOAT" />
+    <result column="change_net" property="change_net" jdbcType="VARCHAR" />
     <result column="share_volume" property="share_volume" jdbcType="INTEGER"></result>
     
   </resultMap>
@@ -33,5 +33,14 @@
     from symbols
     where symbolName like concat('%',#{symbol},'%') OR company like concat('%',#{company},'%')
   </select>
+  
+  <update id="updateSymbol" parameterType="com.team4.pojo.Symbol">
+  	update symbols 
+  	set company = #{company,jdbcType=VARCHAR},
+  		LastSale = #{symbol,jdbcType=DOUBLE},
+  		change_net = #{symbol,jdbcType=VARCHAR},
+  		share_volume = #{symbol,jdbcType=INTEGER}
+  	where symbolName = #{symbol,jdbcType=VARCHAR}
+  </update>
   
 </mapper>

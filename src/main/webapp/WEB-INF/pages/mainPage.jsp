@@ -12,21 +12,24 @@
 	String[] symbolName = new String[symbolSize];
 	Double[] symbolPrice = new Double[symbolSize];
 	double cur_price = 0;
+	if (request.getSession().getAttribute("cur_price") != null) {
+		cur_price = (Double)request.getSession().getAttribute("cur_price");
+	}
 	String cur_symbol = (String)request.getSession().getAttribute("cur_symbol");
 	int i = 0;
 	for (Symbol symbol : symbolData) {
 		symbolName[i] = symbol.getSymbol();
 		symbolPrice[i] = symbol.getLast_sale();
-		if (cur_symbol.equals(symbol.getSymbol())) {
+		if (symbol.getSymbol().equals(cur_symbol)) {
 			cur_price = symbol.getLast_sale();
 		}
 		i++;
-		// System.out.println("name: " + symbolName[i] + ", price: " + symbolPrice[i]);
 	}
-	// request.getSession().getAttribute("cur_trader");
+	request.getSession().setAttribute("cur_price", cur_price);
 	System.out.println(basePath);
 	System.out.println(request.getSession().getAttribute("cur_trader"));
 	System.out.println(request.getSession().getAttribute("cur_symbol"));
+	System.out.println(request.getSession().getAttribute("cur_price"));
 %>
 <!DOCTYPE html>
 <html>
@@ -97,11 +100,11 @@
             var FOK = $("#fok").val();
             var condition = $("#cond").val();
             var txt = "symbol:"+symbol+"\n"+"side:"+side+"\n"+"Qty:"+Qty+"\n"+"price:"+price+"\n"+"otherPrice:"+otherPrice+"\n"+"FOK:"+FOK+"\n"+"condition:"+condition;
-       		alert(txt);
+            alert(txt);
        }
         function checkSelectSymbol(symbol){
         	<%for (int p = 0; p < symbolSize; p++) { %>
-        		if("<%=symbolData.get(p).getSymbol()%>"==symbol || "<%=symbolData.get(p).getSymbol()%>" == "<%=cur_symbol%>") {
+        		if("<%=symbolData.get(p).getSymbol()%>"==symbol) {
         			$('#currenPrice').html("<%=symbolData.get(p).getSymbol()%> : <%=symbolData.get(p).getLast_sale()%>");
         		}
         	<%}%>
@@ -388,8 +391,8 @@
 					class="table table-condensed table-hover table-striped">
 					<thead>
 						<tr>
-							<th data-column-id="matchID" data-identifier="true"
-								data-type="numeric">ID</th>
+							<!-- <th data-column-id="matchID" data-identifier="true"
+								data-type="numeric">ID</th> -->
 							<th data-column-id="symbol">Symbol 1</th>
 							<th data-column-id="bid_price">Bid</th>
 							<th data-column-id="bid_size">BidSize</th>
@@ -406,8 +409,8 @@
 					class="table table-condensed table-hover table-striped">
 					<thead>
 						<tr>
-							<th data-column-id="matchID" data-identifier="true"
-								data-type="numeric">ID</th>
+							<!-- <th data-column-id="matchID" data-identifier="true"
+								data-type="numeric">ID</th> -->
 							<th data-column-id="symbol">Symbol 2</th>
 							<th data-column-id="bid_price">Bid</th>
 							<th data-column-id="bid_size">BidSize</th>

@@ -157,7 +157,7 @@
             formatters: {
                 "commands": function(column, row)
                 {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.symbol + "\">OK<span class=\"fa fa-trash-o\"></span></button>";
+                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.symbol + "\">Order<span class=\"fa fa-trash-o\"></span></button>";
                 }
             }
         }).on("loaded.rs.jquery.bootgrid", function()

@@ -33,6 +33,8 @@ public interface OrderService {
 	public List<Order> getMinAskOrdersBySymbol(String symbol);
 	
 	public int currentOrderId();
+	
+	public List<Order> getPageOrders(int current, int rowCount, String traderName);
 
 	public int getOrderCount();
 

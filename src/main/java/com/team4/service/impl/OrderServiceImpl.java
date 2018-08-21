@@ -89,4 +89,11 @@ public class OrderServiceImpl implements OrderService {
 		return id;
 	}
 
+	public List<Order> getPageOrders(int current, int rowCount, String traderName) {
+		PageHelper.startPage(current,rowCount);
+		List<Order> orders = orderMapper.getBidOrdersByTrader(traderName);
+		orders.addAll(orderMapper.getAskOrdersByTrader(traderName));
+		return orders;
+	}
+
 }

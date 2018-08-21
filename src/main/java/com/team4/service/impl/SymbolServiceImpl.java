@@ -38,4 +38,8 @@ public class SymbolServiceImpl implements SymbolService {
 		return symbols;
 	}
 
+	public void updateSymbol(Symbol symbol) {
+		symbolMapper.updateSymbol(symbol);
+	}
+
 }

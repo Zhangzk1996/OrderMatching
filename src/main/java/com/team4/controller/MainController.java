@@ -67,6 +67,8 @@ public class MainController {
 	@RequestMapping(value = "/mainPage")
 	public ModelAndView mainPage(HttpServletRequest request) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
+		List<Symbol> symbols = symbolService.getAllSymbol();
+		request.getSession().setAttribute("symbolData", symbols);
 		modelAndView.setViewName("/mainPage");
 		return modelAndView;
 	}
@@ -97,10 +99,12 @@ public class MainController {
 	public OrderGrid getUserList(HttpServletRequest request, @RequestParam("current") int current,
 			@RequestParam("rowCount") int rowCount) {
 		Trader cur_trader = (Trader) request.getSession().getAttribute("cur_trader");
-		int total = orderService.getAskOrdersByTrader(cur_trader.getTraderName()).size()
-				+ orderService.getBidOrdersByTrader(cur_trader.getTraderName()).size();
-		List<Order> list = orderService.getAskOrdersByTrader(cur_trader.getTraderName());
-		list.addAll(orderService.getBidOrdersByTrader(cur_trader.getTraderName()));
+//		int total = orderService.getAskOrdersByTrader(cur_trader.getTraderName()).size()
+//				+ orderService.getBidOrdersByTrader(cur_trader.getTraderName()).size();
+//		List<Order> list = orderService.getAskOrdersByTrader(cur_trader.getTraderName());
+//		list.addAll(orderService.getBidOrdersByTrader(cur_trader.getTraderName()));
+		List<Order> list = orderService.getPageOrders(current, rowCount, cur_trader.getTraderName());
+		int total = list.size();
 		OrderGrid orderGrid = new OrderGrid();
 		orderGrid.setCurrent(current);
 		orderGrid.setRowCount(rowCount);

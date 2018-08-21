@@ -11,5 +11,7 @@ public interface SymbolMapper {
 	public List<Symbol> getAllSymbol();
 	
 	public List<Symbol> getSymbolsByStr(String str);
+	
+	public void updateSymbol(Symbol symbol);
 
 }

@@ -13,5 +13,7 @@ public interface SymbolService {
 	public List<Symbol> getSymbolsByStr(String str);
 
 	public List<Symbol> getPageSymbols(int current, int rowCount);
+	
+	public void updateSymbol(Symbol symbol);
 
 }

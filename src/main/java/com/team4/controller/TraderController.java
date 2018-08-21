@@ -68,8 +68,6 @@ public class TraderController {
 			ModelMap modelMap) throws Exception {
 		ModelAndView modelAndView = new ModelAndView();
 		Trader cur_trader = traderService.getTraderInfo(trader.getEmail());
-		List<Symbol> symbols = symbolService.getAllSymbol();
-		request.getSession().setAttribute("symbolData", symbols);
 		if (cur_trader != null) {
 			String pwd = MD5.md5(trader.getPassword());
 			if (pwd.equals(cur_trader.getPassword())) {
@@ -80,6 +78,9 @@ public class TraderController {
 				modelAndView.addObject("passError", "Error password or username!");
 				modelAndView.setViewName("/login");
 			}
+		} else {
+			modelAndView.addObject("passError", "No this user! Please register!");
+			modelAndView.setViewName("/login");
 		}
 		return modelAndView;
 	}

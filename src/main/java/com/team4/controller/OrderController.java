@@ -18,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team4.pojo.MatchOrder;
 import com.team4.pojo.Order;
+import com.team4.pojo.Symbol;
 import com.team4.pojo.Trader;
 import com.team4.service.MatchOrderService;
 import com.team4.service.OrderService;
+import com.team4.service.SymbolService;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -31,6 +33,9 @@ public class OrderController {
 
 	@Autowired
 	private MatchOrderService matchOrderService;
+	
+	@Autowired
+	private SymbolService symbolService;
 
 	@RequestMapping(value = "/addOrder")
 	public ModelAndView addOrder(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap,
@@ -38,17 +43,92 @@ public class OrderController {
 		ModelAndView modelAndView = new ModelAndView("redirect:/main/mainPage");
 
 		Trader trader = (Trader) request.getSession().getAttribute("cur_trader");
+		double cur_price = 0; // (Double) request.getSession().getAttribute("cur_price");
+		List<Symbol> symbolList = symbolService.getAllSymbol();
+		for (Symbol symbol : symbolList) {
+			if (symbol.getSymbol().equals(order.getSymbol())) {
+				cur_price = symbol.getLast_sale();
+				break;
+			}
+		}
+		System.out.println("cur_price: " + cur_price);
 		order.setTraderName(trader.getTraderName());
 		order.setSta("alive");
+
+		List<Order> symbolOrders = orderService.getAskOrdersBySymbol(order.getSymbol());
+		symbolOrders.addAll(orderService.getBidOrdersBySymbol(order.getSymbol()));
+		Symbol newSymbol = new Symbol();
+
+		for (Order so : symbolOrders) {
+			if (so.getSta().equals("limit")) {
+				if (so.getCond().equals("Market Order")) {
+					if (so.getSide().equals("buy")) {
+						if (cur_price <= so.getPrice()) {
+							so.setSta("alive");
+							orderService.updateOrder(so);
+						}
+					} else {
+						if (cur_price >= so.getPrice()) {
+							so.setSta("alive");
+							orderService.updateOrder(so);
+						}
+					}
+				} else if (order.getCond().equals("Limit Order")) {
+					if (so.getSide().equals("buy")) {
+						if (cur_price <= so.getOtherPrice()) {
+							so.setSta("alive");
+							orderService.updateOrder(so);
+						}
+					} else {
+						if (cur_price >= so.getOtherPrice()) {
+							so.setSta("alive");
+							orderService.updateOrder(so);
+						}
+					}
+				}
+			}
+		}
+
 		orderService.addOrder(order);
 		order.setOrderId(orderService.currentOrderId());
 
 		if (order.getCond().equals("Limit Order")) {
-			modelAndView = limitOrder(request, order);
+			if (order.getSide().equals("buy")) {
+				if (cur_price > order.getOtherPrice()) {
+					order.setSta("limit");
+					orderService.updateOrder(order);
+				} else {
+					modelAndView = limitOrder(request, order);
+				}
+			} else {
+				if (cur_price < order.getOtherPrice()) {
+					order.setSta("limit");
+					orderService.updateOrder(order);
+				} else {
+					modelAndView = limitOrder(request, order);
+				}
+			}
+			newSymbol.setLast_sale(order.getOtherPrice());
 		} else if (order.getCond().equals("Market Order")) {
-			modelAndView = matchingMarket(request, order);
+			if (order.getSide().equals("buy")) {
+				if (cur_price > order.getPrice()) {
+					order.setSta("limit");
+					orderService.updateOrder(order);
+				} else {
+					modelAndView = matchingMarket(request, order);
+				}
+			} else {
+				if (cur_price < order.getPrice()) {
+					order.setSta("limit");
+					orderService.updateOrder(order);
+				} else {
+					modelAndView = matchingMarket(request, order);
+				}
+			}
+			newSymbol.setLast_sale(order.getPrice());
 		}
-
+		
+		symbolService.updateSymbol(newSymbol);
 		return modelAndView;
 	}
 
@@ -194,6 +274,9 @@ public class OrderController {
 			count = count - o.getQty();
 		}
 		modelAndView.addObject("matchResult", matchResult);
+		if (matchOrders.size() > 0) {
+			request.getSession().setAttribute("cur_price", matchOrders.get(matchOrders.size() - 1).getPrice());
+		}
 		return modelAndView;
 	}
 
@@ -209,10 +292,11 @@ public class OrderController {
 		matchOrder.setAsk_price(ask.getPrice());
 		matchOrder.setAsk_size(ask.getQty());
 		matchOrderService.addMatchOrder(matchOrder);
+
 	}
 
 	@RequestMapping(value = "/deleteOrder")
-//	@ResponseBody
+	// @ResponseBody
 	public ModelAndView deleteOrder(HttpServletRequest request, @RequestParam("orderId") Integer orderId)
 			throws Exception {
 		String url = request.getHeader("Referer");

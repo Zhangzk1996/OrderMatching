@@ -190,4 +190,26 @@ function checkOrderInformation(){
     if(checkCondition(condition) == false) {
         return false;
     }
+//   if (condition == "Market Order" ) {
+//   	if (side == "buy") {
+//   		if (parseFloat(price) < parseFloat(cur_price)) {
+//   			return false;
+//   		}
+//   	} else {
+//   		if (parseFloat(price) > parseFloat(cur_price)) {
+//    			return false;
+//   		}
+//   	}
+//    }
+//    if (condition == "Limit Order" ) {
+//    	if (side == "buy") {
+//    		if (parseFloat(otherPrice) < parseFloat(cur_price)) {
+//    			return false;
+//    		}
+//    	} else {
+//    		if (parseFloat(otherPrice) > parseFloat(cur_price)) {
+//    			return false;
+//    		}
+//    	}
+//    }
 }
